@@ -439,6 +439,16 @@ var _ api.Authorizer = (*Kathrein)(nil)
 
 // Authorize implements the api.Authorizer interface
 func (wb *Kathrein) Authorize(rfid string) error {
+	s, err := wb.conn.ReadHoldingRegisters(kathreinRegChargingState, 1)
+	if err != nil {
+		return "", err
+	}
+
+	state := binary.BigEndian.Uint16(s)
+	if state > 2 {
+		return nil
+	}
+
 	tag := []byte(rfid)
 	l := len(tag)
 	if l == 0 {
