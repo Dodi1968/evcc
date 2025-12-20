@@ -335,15 +335,18 @@ var _ api.PhaseSwitcher = (*Kathrein)(nil)
 
 // Phases1p3p implements the api.PhaseSwitcher interface
 func (wb *Kathrein) Phases1p3p(phases int) error {
-	var u uint16 = 0x0007 // Three phase charging
-
-	if phases == 1 {
-		u = 0x0001 // One phase charging
-	}
-
-	enabled, err := wb.Enabled()
+	b, err := wb.conn.ReadHoldingRegisters(kathreinRegEMSSetpointChargingCurrent, 1)
 	if err != nil {
 		return err
+	}
+	curr := binary.BigEndian.Uint16(b)
+
+	var u uint16
+	if phases == 1 {
+		u = 0x0001 // One phase charging
+	} else {
+		u = 0x0007             // Three phase charging
+		curr = min(curr, 6000) // Set 6A as current limit to avoid grid consumption
 	}
 
 	// EMS-Control must be enabled before sending first WriteReg Command
@@ -356,18 +359,17 @@ func (wb *Kathrein) Phases1p3p(phases int) error {
 		return err
 	}
 
-	// Disable and re-enable charging to apply the new phase setting
-	if err := wb.Enable(false); err != nil {
+	// Set current to zero to apply the new phase setting
+	if _, err := wb.conn.WriteSingleRegister(kathreinRegkathreinRegEMSSetpointChargingCurrent, 0); err != nil {
 		return err
 	}
 
-	if enabled {
-		if phases == 3 {
-			wb.curr = 6000
-		}
-		wb.log.DEBUG.Println("Test debug - phase switching: ", phases, "P, set current to ", wb.curr, "mA") // Only for testing
-		return wb.Enable(true)
+	// Set current back to original value
+	if _, err := wb.conn.WriteSingleRegister(kathreinRegkathreinRegEMSSetpointChargingCurrent, curr); err != nil {
+		return err
 	}
+
+	wb.log.DEBUG.Println("Test debug - phase switching: ", phases, "P, set current to ", curr, "mA") // Only for testing
 
 	return nil
 }
