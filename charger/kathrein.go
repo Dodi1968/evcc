@@ -360,12 +360,12 @@ func (wb *Kathrein) Phases1p3p(phases int) error {
 	}
 
 	// Set current to zero to apply the new phase setting
-	if _, err := wb.conn.WriteSingleRegister(kathreinRegkathreinRegEMSSetpointChargingCurrent, 0); err != nil {
+	if _, err := wb.conn.WriteSingleRegister(kathreinRegEMSSetpointChargingCurrent, 0); err != nil {
 		return err
 	}
 
 	// Set current back to original value
-	if _, err := wb.conn.WriteSingleRegister(kathreinRegkathreinRegEMSSetpointChargingCurrent, curr); err != nil {
+	if _, err := wb.conn.WriteSingleRegister(kathreinRegEMSSetpointChargingCurrent, curr); err != nil {
 		return err
 	}
 
