@@ -760,9 +760,6 @@ func (lp *Loadpoint) SetVehicle(vehicle api.Vehicle) {
 
 	// disable auto-detect
 	lp.stopVehicleDetection()
-
-	// authorize vehicle for charging --> New
-	lp.authorizeVehicle(vehicle)
 }
 
 // GetSoc returns the estimated vehicle soc in %

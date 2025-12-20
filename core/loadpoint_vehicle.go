@@ -82,6 +82,11 @@ func (lp *Loadpoint) authorizeVehicle(vehicle api.Vehicle) {
 		return
 	}
 
+	if vehicle == nil {
+		lp.log.DEBUG.Println("Test debug - no vehicle") // Only for testing
+		return
+	}
+
 	rfid := vehicle.Identifiers()[0]
 	if len(rfid) == 0 {
 		lp.log.DEBUG.Println("Test debug - rfid is not set") // Only for testing
@@ -91,7 +96,7 @@ func (lp *Loadpoint) authorizeVehicle(vehicle api.Vehicle) {
 	if err := authorizer.Authorize(rfid); err != nil {
 		lp.log.ERROR.Println("charger vehicle authorization:", err)
 	} else {
-		lp.log.DEBUG.Println("remote authorization by vehicle identifier: ", rfid)
+		lp.log.DEBUG.Println("authorized by vehicle id: ", rfid)
 	}
 }
 
@@ -190,6 +195,9 @@ func (lp *Loadpoint) setActiveVehicle(v api.Vehicle) {
 
 		lp.session.Vehicle = title
 	})
+
+	// authorize vehicle for charging --> New
+	lp.authorizeVehicle(v)
 }
 
 func (lp *Loadpoint) wakeUpVehicle() {
