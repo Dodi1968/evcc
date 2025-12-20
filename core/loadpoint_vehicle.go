@@ -91,7 +91,7 @@ func (lp *Loadpoint) authorizeVehicle(vehicle api.Vehicle) {
 	if err := authorizer.Authorize(rfid); err != nil {
 		lp.log.ERROR.Println("charger vehicle authorization:", err)
 	} else {
-		lp.log.DEBUG.Println("authorized by vehicle id: ", rfid)
+		lp.log.DEBUG.Println("authorized by vehicle id:", rfid)
 	}
 }
 

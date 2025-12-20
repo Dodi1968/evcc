@@ -369,7 +369,7 @@ func (wb *Kathrein) Phases1p3p(phases int) error {
 		return err
 	}
 
-	wb.log.DEBUG.Println("Test debug - phase switching: ", phases, "P, set current to ", curr, "mA") // Only for testing
+	wb.log.DEBUG.Println("Test debug - phase switching:", phases, "P, set current to", curr, "mA") // Only for testing
 
 	return nil
 }
@@ -455,7 +455,7 @@ func (wb *Kathrein) Authorize(rfid string) error {
 		return nil
 	}
 
-	wb.log.DEBUG.Println("Test debug - authorize via modbus by rfid: ", rfid) // only for testing
+	wb.log.DEBUG.Println("Test debug - authorize via modbus by rfid:", rfid) // only for testing
 
 	for l < 32 {
 		tag = append(tag, 0)
