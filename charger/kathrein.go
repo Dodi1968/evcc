@@ -441,7 +441,7 @@ var _ api.Authorizer = (*Kathrein)(nil)
 func (wb *Kathrein) Authorize(rfid string) error {
 	s, err := wb.conn.ReadHoldingRegisters(kathreinRegChargingState, 1)
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	state := binary.BigEndian.Uint16(s)
