@@ -82,11 +82,6 @@ func (lp *Loadpoint) authorizeVehicle(vehicle api.Vehicle) {
 		return
 	}
 
-	if vehicle == nil {
-		lp.log.DEBUG.Println("Test debug - no vehicle") // Only for testing
-		return
-	}
-
 	rfid := vehicle.Identifiers()[0]
 	if len(rfid) == 0 {
 		lp.log.DEBUG.Println("Test debug - rfid is not set") // Only for testing
