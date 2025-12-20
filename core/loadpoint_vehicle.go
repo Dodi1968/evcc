@@ -175,6 +175,9 @@ func (lp *Loadpoint) setActiveVehicle(v api.Vehicle) {
 		lp.addTask(lp.vehicleOdometer)
 
 		lp.progress.Reset()
+
+		// authorize vehicle for charging --> New
+		lp.authorizeVehicle(v)
 	} else {
 		lp.socEstimator = nil
 		lp.unpublishVehicleIdentity()
@@ -195,9 +198,6 @@ func (lp *Loadpoint) setActiveVehicle(v api.Vehicle) {
 
 		lp.session.Vehicle = title
 	})
-
-	// authorize vehicle for charging --> New
-	lp.authorizeVehicle(v)
 }
 
 func (lp *Loadpoint) wakeUpVehicle() {
