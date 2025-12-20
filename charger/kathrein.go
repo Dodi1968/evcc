@@ -346,7 +346,7 @@ func (wb *Kathrein) Phases1p3p(phases int) error {
 		u = 0x0001 // One phase charging
 	} else {
 		u = 0x0007             // Three phase charging
-		curr = min(curr, 6000) // Set 6A as current limit to avoid grid consumption
+		curr = min(curr, 6000) // Set 6A as limit to avoid grid consumption
 	}
 
 	// EMS-Control must be enabled before sending first WriteReg Command
