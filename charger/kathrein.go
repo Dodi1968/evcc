@@ -335,18 +335,15 @@ var _ api.PhaseSwitcher = (*Kathrein)(nil)
 
 // Phases1p3p implements the api.PhaseSwitcher interface
 func (wb *Kathrein) Phases1p3p(phases int) error {
-	b, err := wb.conn.ReadHoldingRegisters(kathreinRegEMSSetpointChargingCurrent, 1)
-	if err != nil {
-		return err
-	}
-	curr := binary.BigEndian.Uint16(b)
+	var u uint16 = 0x0007 // Three phase charging
 
-	var u uint16
 	if phases == 1 {
 		u = 0x0001 // One phase charging
-	} else {
-		u = 0x0007             // Three phase charging
-		curr = min(curr, 6000) // Set 6A as limit to avoid grid consumption
+	}
+
+	enabled, err := wb.Enabled()
+	if err != nil {
+		return err
 	}
 
 	// EMS-Control must be enabled before sending first WriteReg Command
@@ -364,12 +361,9 @@ func (wb *Kathrein) Phases1p3p(phases int) error {
 		return err
 	}
 
-	// Set current back to original value
-	if _, err := wb.conn.WriteSingleRegister(kathreinRegEMSSetpointChargingCurrent, curr); err != nil {
-		return err
+	if enabled {
+		return wb.Enable(true)
 	}
-
-	wb.log.DEBUG.Println("Test debug - phase switching:", phases, "P, set current to", curr, "mA") // Only for testing
 
 	return nil
 }
@@ -439,16 +433,6 @@ var _ api.Authorizer = (*Kathrein)(nil)
 
 // Authorize implements the api.Authorizer interface
 func (wb *Kathrein) Authorize(rfid string) error {
-	s, err := wb.conn.ReadHoldingRegisters(kathreinRegChargingState, 1)
-	if err != nil {
-		return err
-	}
-
-	state := binary.BigEndian.Uint16(s)
-	if state > 2 {
-		return nil
-	}
-
 	tag := []byte(rfid)
 	l := len(tag)
 	if l == 0 {
