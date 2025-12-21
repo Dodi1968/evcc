@@ -82,9 +82,26 @@ func (lp *Loadpoint) authorizeVehicle(vehicle api.Vehicle) {
 		return
 	}
 
+	sr, oksr := lp.charger.(api.StatusReasoner)
+	if !oksr {
+		lp.log.DEBUG.Println("Test debug - charger has no statusreasoner api") // Only for testing
+		return
+	}
+
+	r, err := sr.StatusReason()
+	if err != nil {
+		lp.log.ERROR.Printf("charger status reason: %v", err)
+		return
+	}
+
+	if r != api.ReasonWaitingForAuthorization {
+		lp.log.DEBUG.Println("Test debug - not waiting for authorization") // Only for testing
+		return
+	}
+
 	rfid := vehicle.Identifiers()[0]
 	if len(rfid) == 0 {
-		lp.log.DEBUG.Println("Test debug - rfid is not set") // Only for testing
+		lp.log.DEBUG.Println("Test debug - rfid is not set at vehicle") // Only for testing
 		return
 	}
 
