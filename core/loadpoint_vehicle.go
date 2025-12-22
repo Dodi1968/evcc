@@ -99,16 +99,15 @@ func (lp *Loadpoint) authorizeVehicle(vehicle api.Vehicle) {
 		return
 	}
 
-	rfid := vehicle.Identifiers()[0]
-	if len(rfid) == 0 {
+	if len(vehicle.Identifiers()) == 0 {
 		lp.log.DEBUG.Println("Test debug - rfid is not set at vehicle") // Only for testing
 		return
 	}
 
-	if err := authorizer.Authorize(rfid); err != nil {
+	if err := authorizer.Authorize(vehicle.Identifiers()[0]); err != nil {
 		lp.log.ERROR.Println("charger vehicle authorization:", err)
 	} else {
-		lp.log.DEBUG.Println("authorized by vehicle id:", rfid)
+		lp.log.DEBUG.Println("authorized by vehicle id:", vehicle.Identifiers()[0])
 	}
 }
 
