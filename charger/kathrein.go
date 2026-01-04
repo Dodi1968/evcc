@@ -387,6 +387,7 @@ func (wb *Kathrein) GetPhases() (int, error) {
 	}
 }
 
+/*
 var _ api.StatusReasoner = (*Kathrein)(nil)
 
 // StatusReason implements the api.StatusReasoner interface
@@ -400,6 +401,7 @@ func (wb *Kathrein) StatusReason() (api.Reason, error) {
 
 	return res, err
 }
+*/
 
 var _ api.Identifier = (*Kathrein)(nil)
 
@@ -429,7 +431,6 @@ func (wb *Kathrein) Identify() (string, error) {
 	return rfid, nil
 }
 
-/*
 var _ api.Authorizer = (*Kathrein)(nil)
 
 // Authorize implements the api.Authorizer interface
@@ -461,7 +462,6 @@ func (wb *Kathrein) Authorize(rfid string) error {
 
 	return nil
 }
-*/
 
 var _ api.Diagnosis = (*Kathrein)(nil)
 
