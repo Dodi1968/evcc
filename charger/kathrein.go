@@ -387,7 +387,6 @@ func (wb *Kathrein) GetPhases() (int, error) {
 	}
 }
 
-/*
 var _ api.StatusReasoner = (*Kathrein)(nil)
 
 // StatusReason implements the api.StatusReasoner interface
@@ -401,7 +400,6 @@ func (wb *Kathrein) StatusReason() (api.Reason, error) {
 
 	return res, err
 }
-*/
 
 var _ api.Identifier = (*Kathrein)(nil)
 
