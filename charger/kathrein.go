@@ -356,8 +356,8 @@ func (wb *Kathrein) Phases1p3p(phases int) error {
 		return err
 	}
 
-	// Set current to zero to apply the new phase setting
-	if _, err := wb.conn.WriteSingleRegister(kathreinRegEMSSetpointChargingCurrent, 0); err != nil {
+	// Disable and re-enable charging to apply the new phase setting
+	if err := wb.Enable(false); err != nil {
 		return err
 	}
 
