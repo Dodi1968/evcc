@@ -429,6 +429,7 @@ func (wb *Kathrein) Identify() (string, error) {
 	return rfid, nil
 }
 
+/*
 var _ api.Authorizer = (*Kathrein)(nil)
 
 // Authorize implements the api.Authorizer interface
@@ -460,6 +461,7 @@ func (wb *Kathrein) Authorize(rfid string) error {
 
 	return nil
 }
+*/
 
 var _ api.Diagnosis = (*Kathrein)(nil)
 
