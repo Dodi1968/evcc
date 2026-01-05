@@ -76,7 +76,7 @@ func (lp *Loadpoint) identifyVehicle() {
 
 // authorizeVehicle authorizes vehicle for charging --> New
 func (lp *Loadpoint) authorizeVehicle() {
-	lp.log.DEBUG.Println("Test debug - hallo") // Only for testing
+	lp.log.DEBUG.Println("Test debug - hallo v2") // Only for testing
 
 	authorizer, ok := lp.charger.(api.Authorizer)
 	if !ok || lp.vehicle == nil {
