@@ -77,26 +77,10 @@ func (lp *Loadpoint) identifyVehicle() {
 // authorizeVehicle authorizes vehicle for charging --> New
 func (lp *Loadpoint) authorizeVehicle() {
 	lp.log.DEBUG.Println("Test debug - hallo") // Only for testing
+
 	authorizer, ok := lp.charger.(api.Authorizer)
-	if !ok {
-		lp.log.DEBUG.Println("Test debug - charger has no authorization api") // Only for testing
-		return
-	}
-
-	sr, oksr := lp.charger.(api.StatusReasoner)
-	if !oksr {
-		lp.log.DEBUG.Println("Test debug - charger has no statusreasoner api") // Only for testing
-		return
-	}
-
-	r, err := sr.StatusReason()
-	if err != nil {
-		lp.log.ERROR.Printf("charger status reason: %v", err)
-		return
-	}
-
-	if r != api.ReasonWaitingForAuthorization {
-		lp.log.DEBUG.Println("Test debug - not waiting for authorization") // Only for testing
+	if !ok || lp.vehicle == nil {
+		lp.log.DEBUG.Println("Test debug - unknown vehicle or charger has no authorization api") // Only for testing
 		return
 	}
 
@@ -188,9 +172,6 @@ func (lp *Loadpoint) setActiveVehicle(v api.Vehicle) {
 		lp.addTask(lp.vehicleOdometer)
 
 		lp.progress.Reset()
-
-		// authorize vehicle for charging --> New
-		lp.authorizeVehicle()
 	} else {
 		lp.socEstimator = nil
 		lp.unpublishVehicleIdentity()
