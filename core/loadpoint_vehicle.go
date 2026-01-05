@@ -75,7 +75,7 @@ func (lp *Loadpoint) identifyVehicle() {
 }
 
 // authorizeVehicle authorizes vehicle for charging --> New
-func (lp *Loadpoint) authorizeVehicle(vehicle api.Vehicle) {
+func (lp *Loadpoint) authorizeVehicle() {
 	authorizer, ok := lp.charger.(api.Authorizer)
 	if !ok {
 		lp.log.DEBUG.Println("Test debug - charger has no authorization api") // Only for testing
@@ -99,7 +99,7 @@ func (lp *Loadpoint) authorizeVehicle(vehicle api.Vehicle) {
 		return
 	}
 
-	rfid := vehicle.Identifiers()
+	rfid := lp.vehicle.Identifiers()
 	if len(rfid) == 0 {
 		lp.log.DEBUG.Println("Test debug - rfid is not set at vehicle") // Only for testing
 		return
@@ -189,7 +189,7 @@ func (lp *Loadpoint) setActiveVehicle(v api.Vehicle) {
 		lp.progress.Reset()
 
 		// authorize vehicle for charging --> New
-		lp.authorizeVehicle(v)
+		lp.authorizeVehicle()
 	} else {
 		lp.socEstimator = nil
 		lp.unpublishVehicleIdentity()
