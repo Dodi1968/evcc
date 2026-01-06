@@ -429,38 +429,40 @@ func (wb *Kathrein) Identify() (string, error) {
 	return rfid, nil
 }
 
+/*
 var _ api.Authorizer = (*Kathrein)(nil)
 
 // Authorize implements the api.Authorizer interface
-func (wb *Kathrein) Authorize(rfid string) error {
-	tag := []byte(rfid)
-	l := len(tag)
-	if l == 0 {
+
+	func (wb *Kathrein) Authorize(rfid string) error {
+		tag := []byte(rfid)
+		l := len(tag)
+		if l == 0 {
+			return nil
+		}
+
+		wb.log.DEBUG.Println("Test debug - authorize via modbus by rfid:", rfid) // only for testing
+
+		for l < 32 {
+			tag = append(tag, 0)
+			l++
+		}
+
+		if _, err := wb.conn.WriteMultipleRegisters(kathreinRegAuthenticationTagID, 16, tag[:32]); err != nil {
+			return err
+		}
+
+		if _, err := wb.conn.WriteSingleRegister(kathreinRegAuthenticationTagType, 0x0000); err != nil {
+			return err
+		}
+
+		if _, err := wb.conn.WriteSingleRegister(kathreinRegAuthenticationTagAction, 0x0001); err != nil {
+			return err
+		}
+
 		return nil
 	}
-
-	wb.log.DEBUG.Println("Test debug - authorize via modbus by rfid:", rfid) // only for testing
-
-	for l < 32 {
-		tag = append(tag, 0)
-		l++
-	}
-
-	if _, err := wb.conn.WriteMultipleRegisters(kathreinRegAuthenticationTagID, 16, tag[:32]); err != nil {
-		return err
-	}
-
-	if _, err := wb.conn.WriteSingleRegister(kathreinRegAuthenticationTagType, 0x0000); err != nil {
-		return err
-	}
-
-	if _, err := wb.conn.WriteSingleRegister(kathreinRegAuthenticationTagAction, 0x0001); err != nil {
-		return err
-	}
-
-	return nil
-}
-
+*/
 var _ api.Diagnosis = (*Kathrein)(nil)
 
 // Diagnose implements the api.Diagnosis interface
