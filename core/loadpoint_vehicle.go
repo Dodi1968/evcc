@@ -90,11 +90,18 @@ func (lp *Loadpoint) authorizeVehicle() {
 		return
 	}
 
+	// Only allow one attempt per id in one waiting-for-athorization-interval
+	if rfid[0] == lp.checkedIdentifier {
+		return
+	}
+
 	if err := authorizer.Authorize(rfid[0]); err != nil {
 		lp.log.ERROR.Println("charger vehicle authorization:", err)
 	} else {
 		lp.log.DEBUG.Println("authorized by vehicle id:", rfid[0])
 	}
+
+	lp.checkedIdentifier = rfid[0]
 }
 
 // selectVehicleByID selects the vehicle with the given ID
