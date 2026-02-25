@@ -432,7 +432,7 @@ func (lp *Loadpoint) vehicleDistance(vehicle api.Vehicle) float64 {
 		return 0
 	}
 
-	lp.log.DEBUG.Printf("vehicle position (lat, lon): %.4f %.4f", lat1, lon1)
+	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat1, lon1)
 
 	if lat1 == 0 && lon1 == 0 { // probably no values from the car
 		return 0
