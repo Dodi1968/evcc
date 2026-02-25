@@ -432,7 +432,7 @@ func (lp *Loadpoint) vehicleDistance(vehicle api.Vehicle) float64 {
 		return 0
 	}
 
-	lp.log.DEBUG.Printf("vehicle position (lat, lon):", lat1, lon1)
+	lp.log.DEBUG.Printf("vehicle position (lat, lon): %.4f %.4f", lat1, lon1)
 
 	if lat1 == 0 && lon1 == 0 { // probably no values from the car
 		return 0
@@ -453,7 +453,7 @@ func (lp *Loadpoint) vehicleDistance(vehicle api.Vehicle) float64 {
 	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
 	distance := 6371 * c // earth radius: 6371 km
 
-	lp.log.DEBUG.Printf("vehicle distance:", distance, "km")
+	lp.log.DEBUG.Printf("vehicle distance: %.3fkm", distance)
 
 	return distance
 }
