@@ -2,6 +2,7 @@ package core
 
 import (
 	"errors"
+	"math"
 	"regexp"
 	"strings"
 	"time"
@@ -317,10 +318,18 @@ func (lp *Loadpoint) identifyVehicleByStatus() {
 		return
 	}
 
+	// Only for geofencing test
+	lp.latLoadpoint = 49.3284
+	lp.lonLoadpoint = 8.6964
+	lp.maxDistance = 0.5
+	lp.geoEnabled = true
+
 	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil {
-		lp.stopVehicleDetection()
-		lp.setActiveVehicle(vehicle)
-		return
+		if !lp.geoEnabled || lp.vehicleDistance(vehicle) <= lp.maxDistance {
+			lp.stopVehicleDetection()
+			lp.setActiveVehicle(vehicle)
+			return
+		}
 	}
 
 	// remove previous vehicle if status was not confirmed
@@ -406,4 +415,45 @@ func (lp *Loadpoint) vehicleClimateActive() bool {
 	}
 
 	return false
+}
+
+// distance of vehicle to loadpoint in km
+// default: 0 km in cases of error or no values from the car
+func (lp *Loadpoint) vehicleDistance(vehicle api.Vehicle) float64 {
+	vs, ok := vehicle.(api.VehiclePosition)
+	if !ok {
+		return 0
+	}
+
+	lat1, lon1, err := vs.Position()
+
+	if err != nil {
+		lp.log.ERROR.Printf("vehicle position: %v", err)
+		return 0
+	}
+
+	lp.log.DEBUG.Printf("vehicle position (lat, lon):", lat1, lon1)
+
+	if lat1 == 0 && lon1 == 0 { // probably no values from the car
+		return 0
+	}
+
+	lat2 := lp.latLoadpoint
+	lon2 := lp.lonLoadpoint
+
+	// Differences in radiant
+	dLat := (lat2 - lat1) * math.Pi / 180.0
+	dLon := (lon2 - lon1) * math.Pi / 180.0
+
+	lat1 = lat1 * math.Pi / 180.0
+	lat2 = lat2 * math.Pi / 180.0
+
+	// Haversine formular
+	a := math.Sin(dLat/2)*math.Sin(dLat/2) + math.Sin(dLon/2)*math.Sin(dLon/2)*math.Cos(lat1)*math.Cos(lat2)
+	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
+	distance := 6371 * c // earth radius: 6371 km
+
+	lp.log.DEBUG.Printf("vehicle distance:", distance, "km")
+
+	return distance
 }
