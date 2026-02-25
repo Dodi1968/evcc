@@ -319,8 +319,8 @@ func (lp *Loadpoint) identifyVehicleByStatus() {
 	}
 
 	// Only for geofencing test
-	lp.latLoadpoint = 10
-	lp.lonLoadpoint = 50
+	lp.latLoadpoint = 49.3284
+	lp.lonLoadpoint = 8.6964
 	lp.maxDistance = 0.5
 	lp.geoEnabled = true
 
