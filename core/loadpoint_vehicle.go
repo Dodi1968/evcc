@@ -422,7 +422,7 @@ func (lp *Loadpoint) vehicleDistance(vehicle api.Vehicle) float64 {
 	lat1 := lp.latLoadpoint
 	lon1 := lp.lonLoadpoint
 
-	if lat1 == 0 && lon2 == 0 {
+	if lat1 == 0 && lon1 == 0 {
 		return 0
 	}
 
