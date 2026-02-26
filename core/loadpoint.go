@@ -178,7 +178,6 @@ type Loadpoint struct {
 	latLoadpoint	float64		// Latitude of loadpoint
 	lonLoadpoint	float64		// Longitude of loadpoint
 	maxDistance		float64		// Maximum distance from loadpoint (km)
-	geoEnabled		bool		// Goeofencing enabled
 
 	// session log
 	db      *session.DB

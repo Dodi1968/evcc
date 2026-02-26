@@ -322,10 +322,9 @@ func (lp *Loadpoint) identifyVehicleByStatus() {
 	lp.latLoadpoint = 49.3284
 	lp.lonLoadpoint = 8.6964
 	lp.maxDistance = 0.5
-	lp.geoEnabled = true
 
 	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil {
-		if !lp.geoEnabled || lp.vehicleDistance(vehicle) <= lp.maxDistance {
+		if lp.vehicleDistance(vehicle) <= lp.maxDistance {
 			lp.stopVehicleDetection()
 			lp.setActiveVehicle(vehicle)
 			return
@@ -420,26 +419,30 @@ func (lp *Loadpoint) vehicleClimateActive() bool {
 // distance of vehicle to loadpoint in km
 // default: 0 km in cases of error or no values from the car
 func (lp *Loadpoint) vehicleDistance(vehicle api.Vehicle) float64 {
+	lat1 := lp.latLoadpoint
+	lon1 := lp.lonLoadpoint
+
+	if lat1 == 0 && lon2 == 0 {
+		return 0
+	}
+
 	vs, ok := vehicle.(api.VehiclePosition)
 	if !ok {
 		return 0
 	}
 
-	lat1, lon1, err := vs.Position()
+	lat2, lon2, err := vs.Position()
 
 	if err != nil {
 		lp.log.ERROR.Printf("vehicle position: %v", err)
 		return 0
 	}
 
-	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat1, lon1)
+	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat2, lon2)
 
-	if lat1 == 0 && lon1 == 0 { // probably no values from the car
+	if lat2 == 0 && lon2 == 0 { // probably no values from the car
 		return 0
 	}
-
-	lat2 := lp.latLoadpoint
-	lon2 := lp.lonLoadpoint
 
 	// Differences in radiant
 	dLat := (lat2 - lat1) * math.Pi / 180.0
