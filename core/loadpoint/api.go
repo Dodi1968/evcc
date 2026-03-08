@@ -145,6 +145,16 @@ type API interface {
 	GetThresholds() ThresholdsConfig
 	// SetThresholds sets the PV mode threshold settings
 	SetThresholds(thresholds ThresholdsConfig)
+
+	// Geofencing settings
+	GetGeofenceEnabled() bool
+	SetGeofenceEnabled(bool)
+	GetGeofenceLat() float64
+	SetGeofenceLat(float64)
+	GetGeofenceLon() float64
+	SetGeofenceLon(float64)
+	GetGeofenceRadius() float64
+	SetGeofenceRadius(float64)
 	// GetEnableThreshold gets the loadpoint enable threshold
 	GetEnableThreshold() float64
 	// SetEnableThreshold sets loadpoint enable threshold

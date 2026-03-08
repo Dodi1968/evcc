@@ -175,10 +175,10 @@ type Loadpoint struct {
 	progress                *Progress     // Step-wise progress indicator
 
 	// Geofencing for vehicle detection
-	geofenceEnabled	bool
-	lat				float64		// Latitude of loadpoint
-	lon				float64		// Longitude of loadpoint
-	radius			float64		// Maximum distance from loadpoint (m)
+	GeofenceEnabled bool    `mapstructure:"geofence_enabled"`
+	Lat             float64 `mapstructure:"lat"`  // Latitude of loadpoint
+	Lon             float64 `mapstructure:"lon"`  // Longitude of loadpoint
+	Radius          float64 `mapstructure:"radius"` // Maximum distance from loadpoint (m)
 
 	// session log
 	db      *session.DB

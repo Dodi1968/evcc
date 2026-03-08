@@ -1027,6 +1027,110 @@ func (mr *MockAPIMockRecorder) SetSocConfig(soc any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetSocConfig", reflect.TypeOf((*MockAPI)(nil).SetSocConfig), soc)
 }
 
+// GetGeofenceEnabled mocks base method.
+func (m *MockAPI) GetGeofenceEnabled() bool {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGeofenceEnabled")
+	ret0, _ := ret[0].(bool)
+	return ret0
+}
+
+// GetGeofenceEnabled indicates an expected call of GetGeofenceEnabled.
+func (mr *MockAPIMockRecorder) GetGeofenceEnabled() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGeofenceEnabled", reflect.TypeOf((*MockAPI)(nil).GetGeofenceEnabled))
+}
+
+// SetGeofenceEnabled mocks base method.
+func (m *MockAPI) SetGeofenceEnabled(enabled bool) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetGeofenceEnabled", enabled)
+}
+
+// SetGeofenceEnabled indicates an expected call of SetGeofenceEnabled.
+func (mr *MockAPIMockRecorder) SetGeofenceEnabled(enabled any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetGeofenceEnabled", reflect.TypeOf((*MockAPI)(nil).SetGeofenceEnabled), enabled)
+}
+
+// GetGeofenceLat mocks base method.
+func (m *MockAPI) GetGeofenceLat() float64 {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGeofenceLat")
+	ret0, _ := ret[0].(float64)
+	return ret0
+}
+
+// GetGeofenceLat indicates an expected call of GetGeofenceLat.
+func (mr *MockAPIMockRecorder) GetGeofenceLat() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGeofenceLat", reflect.TypeOf((*MockAPI)(nil).GetGeofenceLat))
+}
+
+// SetGeofenceLat mocks base method.
+func (m *MockAPI) SetGeofenceLat(lat float64) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetGeofenceLat", lat)
+}
+
+// SetGeofenceLat indicates an expected call of SetGeofenceLat.
+func (mr *MockAPIMockRecorder) SetGeofenceLat(lat any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetGeofenceLat", reflect.TypeOf((*MockAPI)(nil).SetGeofenceLat), lat)
+}
+
+// GetGeofenceLon mocks base method.
+func (m *MockAPI) GetGeofenceLon() float64 {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGeofenceLon")
+	ret0, _ := ret[0].(float64)
+	return ret0
+}
+
+// GetGeofenceLon indicates an expected call of GetGeofenceLon.
+func (mr *MockAPIMockRecorder) GetGeofenceLon() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGeofenceLon", reflect.TypeOf((*MockAPI)(nil).GetGeofenceLon))
+}
+
+// SetGeofenceLon mocks base method.
+func (m *MockAPI) SetGeofenceLon(lon float64) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetGeofenceLon", lon)
+}
+
+// SetGeofenceLon indicates an expected call of SetGeofenceLon.
+func (mr *MockAPIMockRecorder) SetGeofenceLon(lon any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetGeofenceLon", reflect.TypeOf((*MockAPI)(nil).SetGeofenceLon), lon)
+}
+
+// GetGeofenceRadius mocks base method.
+func (m *MockAPI) GetGeofenceRadius() float64 {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGeofenceRadius")
+	ret0, _ := ret[0].(float64)
+	return ret0
+}
+
+// GetGeofenceRadius indicates an expected call of GetGeofenceRadius.
+func (mr *MockAPIMockRecorder) GetGeofenceRadius() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGeofenceRadius", reflect.TypeOf((*MockAPI)(nil).GetGeofenceRadius))
+}
+
+// SetGeofenceRadius mocks base method.
+func (m *MockAPI) SetGeofenceRadius(radius float64) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetGeofenceRadius", radius)
+}
+
+// SetGeofenceRadius indicates an expected call of SetGeofenceRadius.
+func (mr *MockAPIMockRecorder) SetGeofenceRadius(radius any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetGeofenceRadius", reflect.TypeOf((*MockAPI)(nil).SetGeofenceRadius), radius)
+}
+
 // SetThresholds mocks base method.
 func (m *MockAPI) SetThresholds(thresholds ThresholdsConfig) {
 	m.ctrl.T.Helper()

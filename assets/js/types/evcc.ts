@@ -204,6 +204,10 @@ export interface ConfigLoadpoint {
   limitEnergy?: number;
   limitSoc?: number;
   circuit?: string;
+  geofence_enabled?: boolean;
+  lat?: number;
+  lon?: number;
+  radius?: number;
   thresholds: {
     enable: LoadpointThreshold;
     disable: LoadpointThreshold;

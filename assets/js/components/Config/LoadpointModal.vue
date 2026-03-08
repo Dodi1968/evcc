@@ -539,8 +539,73 @@
 									</div>
 								</div>
 							</div>
+
 							<div v-else>
 								<p class="text-muted">{{ $t("config.loadpoint.noVehicles") }}</p>
+							</div>
+
+							<div class="mt-4">
+								<h6>{{ $t("config.loadpoint.geofenceTitle") }}</h6>
+
+								<FormRow
+									id="loadpointGeofenceEnable"
+									:label="$t('config.loadpoint.geofenceEnableLabel')"
+								>
+									<PropertyField
+										id="loadpointGeofenceEnable"
+										v-model="values.geofence_enabled"
+										type="Bool"
+									/>
+								</FormRow>
+
+								<div v-if="values.geofence_enabled" class="ms-3 mb-5">
+									<div class="row g-3">
+										<div class="col-sm-4">
+											<FormRow
+												id="loadpointGeofenceLat"
+												:label="$t('config.loadpoint.geofenceLatLabel')"
+											>
+												<PropertyField
+													id="loadpointGeofenceLat"
+													v-model="values.lat"
+													type="Float"
+													size="w-25 w-min-200"
+													required
+												/>
+											</FormRow>
+										</div>
+										<div class="col-sm-4">
+											<FormRow
+												id="loadpointGeofenceLon"
+												:label="$t('config.loadpoint.geofenceLonLabel')"
+											>
+												<PropertyField
+													id="loadpointGeofenceLon"
+													v-model="values.lon"
+													type="Float"
+													size="w-25 w-min-200"
+													required
+												/>
+											</FormRow>
+										</div>
+										<div class="col-sm-4">
+											<FormRow
+												id="loadpointGeofenceRadius"
+												:label="$t('config.loadpoint.geofenceRadiusLabel')"
+												:help="$t('config.loadpoint.geofenceRadiusHelp')"
+											>
+												<PropertyField
+													id="loadpointGeofenceRadius"
+													v-model="values.radius"
+													type="Float"
+													unit="m"
+													size="w-25 w-min-200"
+													required
+												/>
+											</FormRow>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -625,6 +690,10 @@ const defaultValues = {
 	vehicle: "",
 	charger: "",
 	circuit: "",
+	geofence_enabled: false,
+	lat: 0,
+	lon: 0,
+	radius: 100,
 	meter: "",
 } as ConfigLoadpoint;
 

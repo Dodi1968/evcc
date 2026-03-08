@@ -34,6 +34,11 @@ type DynamicConfig struct {
 
 	PlanStrategy api.PlanStrategy `json:"planStrategy"`
 
+	GeofenceEnabled bool    `json:"geofence_enabled" mapstructure:"geofence_enabled"`
+	GeofenceLat     float64 `json:"lat" mapstructure:"lat"`
+	GeofenceLon     float64 `json:"lon" mapstructure:"lon"`
+	GeofenceRadius  float64 `json:"radius" mapstructure:"radius"`
+
 	Thresholds ThresholdsConfig `json:"thresholds"`
 	Soc        SocConfig        `json:"soc"`
 }
@@ -71,6 +76,10 @@ func (payload DynamicConfig) Apply(lp API) error {
 
 	// TODO mode warning
 	lp.SetSocConfig(payload.Soc)
+	lp.SetGeofenceEnabled(payload.GeofenceEnabled)
+	lp.SetGeofenceLat(payload.GeofenceLat)
+	lp.SetGeofenceLon(payload.GeofenceLon)
+	lp.SetGeofenceRadius(payload.GeofenceRadius)
 
 	mode, err := api.ChargeModeString(payload.DefaultMode)
 	if err == nil {

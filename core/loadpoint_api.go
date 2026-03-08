@@ -460,6 +460,90 @@ func (lp *Loadpoint) SetSocConfig(soc loadpoint.SocConfig) {
 	lp.setSocConfig(soc)
 }
 
+// GetGeofenceEnabled returns if geofencing is enabled
+func (lp *Loadpoint) GetGeofenceEnabled() bool {
+	lp.RLock()
+	defer lp.RUnlock()
+	return lp.GeofenceEnabled
+}
+
+// SetGeofenceEnabled sets if geofencing is enabled
+func (lp *Loadpoint) SetGeofenceEnabled(enabled bool) {
+	if !lp.isConfigurable() {
+		lp.log.ERROR.Println("cannot set geofence enabled: not configurable")
+		return
+	}
+
+	lp.Lock()
+	defer lp.Unlock()
+
+	lp.GeofenceEnabled = enabled
+	lp.settings.SetBool(keys.GeofenceEnabled, enabled)
+}
+
+// GetGeofenceLat returns the geofence latitude
+func (lp *Loadpoint) GetGeofenceLat() float64 {
+	lp.RLock()
+	defer lp.RUnlock()
+	return lp.Lat
+}
+
+// SetGeofenceLat sets the geofence latitude
+func (lp *Loadpoint) SetGeofenceLat(lat float64) {
+	if !lp.isConfigurable() {
+		lp.log.ERROR.Println("cannot set geofence latitude: not configurable")
+		return
+	}
+
+	lp.Lock()
+	defer lp.Unlock()
+
+	lp.Lat = lat
+	lp.settings.SetFloat(keys.GeofenceLat, lat)
+}
+
+// GetGeofenceLon returns the geofence longitude
+func (lp *Loadpoint) GetGeofenceLon() float64 {
+	lp.RLock()
+	defer lp.RUnlock()
+	return lp.Lon
+}
+
+// SetGeofenceLon sets the geofence longitude
+func (lp *Loadpoint) SetGeofenceLon(lon float64) {
+	if !lp.isConfigurable() {
+		lp.log.ERROR.Println("cannot set geofence longitude: not configurable")
+		return
+	}
+
+	lp.Lock()
+	defer lp.Unlock()
+
+	lp.Lon = lon
+	lp.settings.SetFloat(keys.GeofenceLon, lon)
+}
+
+// GetGeofenceRadius returns the geofence radius in meters
+func (lp *Loadpoint) GetGeofenceRadius() float64 {
+	lp.RLock()
+	defer lp.RUnlock()
+	return lp.Radius
+}
+
+// SetGeofenceRadius sets the geofence radius in meters
+func (lp *Loadpoint) SetGeofenceRadius(radius float64) {
+	if !lp.isConfigurable() {
+		lp.log.ERROR.Println("cannot set geofence radius: not configurable")
+		return
+	}
+
+	lp.Lock()
+	defer lp.Unlock()
+
+	lp.Radius = radius
+	lp.settings.SetFloat(keys.GeofenceRadius, radius)
+}
+
 // GetThresholds returns the PV mode threshold settings
 func (lp *Loadpoint) GetThresholds() loadpoint.ThresholdsConfig {
 	lp.RLock()
