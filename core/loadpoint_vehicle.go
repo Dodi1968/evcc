@@ -319,12 +319,13 @@ func (lp *Loadpoint) identifyVehicleByStatus() {
 	}
 
 	// Only for geofencing test
-	lp.latLoadpoint = 49.3284
-	lp.lonLoadpoint = 8.6964
-	lp.maxDistance = 0.5
+	lp.geofenceEnabled = true
+	lp.lat = 49.3284
+	lp.lon = 8.6964
+	lp.radius = 100
 
 	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil {
-		if lp.vehicleDistance(vehicle) <= lp.maxDistance {
+		if lp.isVehicleAtHome(vehicle) {
 			lp.stopVehicleDetection()
 			lp.setActiveVehicle(vehicle)
 			return
@@ -416,33 +417,37 @@ func (lp *Loadpoint) vehicleClimateActive() bool {
 	return false
 }
 
-// distance of vehicle to loadpoint in km
-// default: 0 km in cases of error or no values from the car
-func (lp *Loadpoint) vehicleDistance(vehicle api.Vehicle) float64 {
-	lat1 := lp.latLoadpoint
-	lon1 := lp.lonLoadpoint
+// isVehicleAtHome checks if vehicle is at home
+// false: if vehicle position is outside the radius
+// true: in all other cases, even in cases of error or no values from the car
 
-	if lat1 == 0 && lon1 == 0 {
-		return 0
+func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
+	if !lp.geofenceEnabled {
+		return true
 	}
 
 	vs, ok := vehicle.(api.VehiclePosition)
 	if !ok {
-		return 0
+		lp.log.DEBUG.Println("vehicle do not support position tracking")
+		return true
 	}
 
-	lat2, lon2, err := vs.Position()
+	lat1, lon1, err := vs.Position()
 
 	if err != nil {
 		lp.log.ERROR.Printf("vehicle position: %v", err)
-		return 0
+		return true
 	}
 
-	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat2, lon2)
+	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat1, lon1)
 
-	if lat2 == 0 && lon2 == 0 { // probably no values from the car
-		return 0
+	if lat1 == 0 && lon1 == 0 { // probably no values from the car
+		lp.log.DEBUG.Println("vehicle not providing position data")
+		return true
 	}
+
+	lat2 := lp.lat
+	lon2 := lp.lon
 
 	// Differences in radiant
 	dLat := (lat2 - lat1) * math.Pi / 180.0
@@ -458,5 +463,5 @@ func (lp *Loadpoint) vehicleDistance(vehicle api.Vehicle) float64 {
 
 	lp.log.DEBUG.Printf("vehicle distance: %.3fkm", distance)
 
-	return distance
+	return distance * 1e3 <= lp.radius
 }
