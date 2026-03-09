@@ -176,9 +176,9 @@ type Loadpoint struct {
 
 	// Geofencing for vehicle detection
 	GeofenceEnabled bool    `mapstructure:"geofence_enabled"`
-	Lat             float64 `mapstructure:"lat"`  // Latitude of loadpoint
-	Lon             float64 `mapstructure:"lon"`  // Longitude of loadpoint
-	Radius          float64 `mapstructure:"radius"` // Maximum distance from loadpoint (m)
+	Lat             float64 `mapstructure:"lat"`			// Latitude of loadpoint position
+	Lon             float64 `mapstructure:"lon"`			// Longitude of loadpoint position
+	Radius          float64 `mapstructure:"radius"`			// Maximum vehicle distance from loadpoint (m)
 
 	// session log
 	db      *session.DB

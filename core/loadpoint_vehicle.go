@@ -318,13 +318,10 @@ func (lp *Loadpoint) identifyVehicleByStatus() {
 		return
 	}
 
-	// Geofence settings are configured in the loadpoint configuration
-	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil {
-		if lp.isVehicleAtHome(vehicle) {
-			lp.stopVehicleDetection()
-			lp.setActiveVehicle(vehicle)
-			return
-		}
+	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil && lp.isVehicleAtHome(vehicle) {
+		lp.stopVehicleDetection()
+		lp.setActiveVehicle(vehicle)
+		return
 	}
 
 	// remove previous vehicle if status was not confirmed
@@ -412,12 +409,12 @@ func (lp *Loadpoint) vehicleClimateActive() bool {
 	return false
 }
 
-// isVehicleAtHome checks if vehicle is at home
-// false: if vehicle position is outside the radius
-// true: in all other cases, even in cases of error or no values from the car
+// isVehicleAtHome checks wether vehicle is at home
+// false: if vehicle position is known and outside the radius
+// true: in all other cases, even in cases of error
 
 func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
-	if !lp.GeofenceEnabled {
+	if !lp.GeofenceEnabled || vehicle == nil {
 		return true
 	}
 
