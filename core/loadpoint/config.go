@@ -34,10 +34,10 @@ type DynamicConfig struct {
 
 	PlanStrategy api.PlanStrategy `json:"planStrategy"`
 
-	GeofenceEnabled bool    `json:"geofenceEnabled" mapstructure:"geofence_enabled"`
-	GeofenceLat     float64 `json:"geofenceLat" mapstructure:"lat"`
-	GeofenceLon     float64 `json:"geofenceLon" mapstructure:"lon"`
-	GeofenceRadius  float64 `json:"geofenceRadius" mapstructure:"radius"`
+	GeofenceEnabled bool    `json:"geofence_enabled" mapstructure:"geofence_enabled"`
+	GeofenceLat     float64 `json:"lat" mapstructure:"lat"`
+	GeofenceLon     float64 `json:"lon" mapstructure:"lon"`
+	GeofenceRadius  float64 `json:"radius" mapstructure:"radius"`
 
 	Thresholds ThresholdsConfig `json:"thresholds"`
 	Soc        SocConfig        `json:"soc"`
