@@ -319,17 +319,15 @@ func (lp *Loadpoint) identifyVehicleByStatus() {
 	}
 
 	// Only for geofencing test
-	lp.geofenceEnabled = true
-	lp.lat = 49.3284
-	lp.lon = 8.6964
-	lp.radius = 100
+	// lp.geofenceEnabled = true
+	// lp.lat = 49.3284
+	// lp.lon = 8.6964
+	// lp.radius = 100
 
-	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil {
-		if lp.isVehicleAtHome(vehicle) {
-			lp.stopVehicleDetection()
-			lp.setActiveVehicle(vehicle)
-			return
-		}
+	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil && lp.isVehicleAtHome(vehicle) {
+		lp.stopVehicleDetection()
+		lp.setActiveVehicle(vehicle)
+		return
 	}
 
 	// remove previous vehicle if status was not confirmed
@@ -422,7 +420,7 @@ func (lp *Loadpoint) vehicleClimateActive() bool {
 // true: in all other cases, even in cases of error or no values from the car
 
 func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
-	if !lp.geofenceEnabled {
+	if !lp.geofenceEnabled || vehicle == nil {
 		return true
 	}
 
