@@ -425,7 +425,6 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 	}
 
 	lat1, lon1, err := vs.Position()
-
 	if err != nil {
 		lp.log.ERROR.Printf("vehicle position: %v", err)
 		return true
