@@ -1987,6 +1987,8 @@ func (lp *Loadpoint) Update(sitePower, batteryBoostPower float64, consumption, f
 		lp.checkedIdentifier = ""
 	}
 
+	lp.log.DEBUG.Println("geofencing config:", lp.geofenceEnabled, lp.lat, lp.lon, lp.radius)
+
 	// publish soc after updating charger status to make sure
 	// initial update of connected state matches charger status
 	lp.publishSocAndRange()

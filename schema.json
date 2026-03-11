@@ -237,6 +237,18 @@
           "vehicle": {
             "type": "string"
           },
+          "geofence_enabled": {
+            "type": "boolean"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lon": {
+            "type": "number"
+          },
+          "radius": {
+            "type": "number"
+          },
           "soc": {
             "type": "object",
             "properties": {
