@@ -175,10 +175,10 @@ type Loadpoint struct {
 	progress                *Progress     // Step-wise progress indicator
 
 	// Geofencing for vehicle detection
-	GeofenceEnabled bool    `mapstructure:"geofence_enabled"`
-	Lat             float64 `mapstructure:"lat"`			// Latitude of loadpoint position
-	Lon             float64 `mapstructure:"lon"`			// Longitude of loadpoint position
-	Radius          float64 `mapstructure:"radius"`			// Maximum vehicle distance from loadpoint (m)
+	GeofenceEnabled 		bool    `mapstructure:"geofence_enabled"`
+	GeofenceLat             float64 `mapstructure:"lat"`			// Latitude of loadpoint position
+	GeofenceLon             float64 `mapstructure:"lon"`			// Longitude of loadpoint position
+	GeofenceRadius          float64 `mapstructure:"radius"`			// Maximum vehicle distance from loadpoint (m)
 
 	// session log
 	db      *session.DB
@@ -1986,6 +1986,8 @@ func (lp *Loadpoint) Update(sitePower, batteryBoostPower float64, consumption, f
 	if len(lp.checkedIdentifier) > 0 && lp.GetStatus() != api.StatusB {
 		lp.checkedIdentifier = ""
 	}
+
+	lp.log.DEBUG.Println("geofencing config:", lp.GeofenceEnabled, lp.GeofenceLat, lp.GeofenceLon, lp.GeofenceRadius)
 
 	// publish soc after updating charger status to make sure
 	// initial update of connected state matches charger status

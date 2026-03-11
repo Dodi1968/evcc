@@ -438,8 +438,8 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 		return true
 	}
 
-	lat2 := lp.Lat
-	lon2 := lp.Lon
+	lat2 := lp.GeofenceLat
+	lon2 := lp.GeofenceLon
 
 	// Differences in radiant
 	dLat := (lat2 - lat1) * math.Pi / 180.0
@@ -455,5 +455,5 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 
 	lp.log.DEBUG.Printf("vehicle distance: %.3fkm", distance)
 
-	return distance * 1e3 <= lp.Radius
+	return distance * 1e3 <= lp.GeofenceRadius
 }

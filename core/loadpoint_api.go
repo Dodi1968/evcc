@@ -485,7 +485,7 @@ func (lp *Loadpoint) SetGeofenceEnabled(enabled bool) {
 func (lp *Loadpoint) GetGeofenceLat() float64 {
 	lp.RLock()
 	defer lp.RUnlock()
-	return lp.Lat
+	return lp.GeofenceLat
 }
 
 // SetGeofenceLat sets the geofence latitude
@@ -498,7 +498,7 @@ func (lp *Loadpoint) SetGeofenceLat(lat float64) {
 	lp.Lock()
 	defer lp.Unlock()
 
-	lp.Lat = lat
+	lp.GeofenceLat = lat
 	lp.settings.SetFloat(keys.GeofenceLat, lat)
 }
 
@@ -506,7 +506,7 @@ func (lp *Loadpoint) SetGeofenceLat(lat float64) {
 func (lp *Loadpoint) GetGeofenceLon() float64 {
 	lp.RLock()
 	defer lp.RUnlock()
-	return lp.Lon
+	return lp.GeofenceLon
 }
 
 // SetGeofenceLon sets the geofence longitude
@@ -519,7 +519,7 @@ func (lp *Loadpoint) SetGeofenceLon(lon float64) {
 	lp.Lock()
 	defer lp.Unlock()
 
-	lp.Lon = lon
+	lp.GeofenceLon = lon
 	lp.settings.SetFloat(keys.GeofenceLon, lon)
 }
 
@@ -527,7 +527,7 @@ func (lp *Loadpoint) SetGeofenceLon(lon float64) {
 func (lp *Loadpoint) GetGeofenceRadius() float64 {
 	lp.RLock()
 	defer lp.RUnlock()
-	return lp.Radius
+	return lp.GeofenceRadius
 }
 
 // SetGeofenceRadius sets the geofence radius in meters
@@ -540,7 +540,7 @@ func (lp *Loadpoint) SetGeofenceRadius(radius float64) {
 	lp.Lock()
 	defer lp.Unlock()
 
-	lp.Radius = radius
+	lp.GeofenceRadius = radius
 	lp.settings.SetFloat(keys.GeofenceRadius, radius)
 }
 

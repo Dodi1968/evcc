@@ -23,10 +23,10 @@ const (
 	DisableDelay      = "disableDelay"
 	BatteryBoost      = "batteryBoost"
 	BatteryBoostLimit = "batteryBoostLimit"
-	GeofenceEnabled   = "geofenceEnabled"
-	GeofenceLat       = "geofenceLat"
-	GeofenceLon       = "geofenceLon"
-	GeofenceRadius    = "geofenceRadius"
+	GeofenceEnabled   = "geofence_enabled"
+	GeofenceLat       = "lat"
+	GeofenceLon       = "lon"
+	GeofenceRadius    = "radius"
 
 	PhasesConfigured = "phasesConfigured" // desired phase mode (0/1/3, 0 = automatic), user selection
 	PhasesActive     = "phasesActive"     // expectedly active phases, taking vehicle into account (1/2/3)
