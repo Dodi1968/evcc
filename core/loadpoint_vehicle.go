@@ -432,8 +432,8 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 
 	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat1, lon1)
 
-	if lat1 == 0 && lon1 == 0 { // probably no values from the car
-		lp.log.DEBUG.Println("vehicle not providing position data")
+	if lat1 == 0 && lon1 == 0 {
+		lp.log.DEBUG.Println("vehicle not sending position data")
 		return true
 	}
 
