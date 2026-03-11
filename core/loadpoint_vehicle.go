@@ -420,7 +420,7 @@ func (lp *Loadpoint) vehicleClimateActive() bool {
 // true: in all other cases, even in cases of error or no values from the car
 
 func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
-	if !lp.geofenceEnabled || vehicle == nil {
+	if !lp.GeofenceEnabled || vehicle == nil {
 		return true
 	}
 
@@ -444,8 +444,8 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 		return true
 	}
 
-	lat2 := lp.lat
-	lon2 := lp.lon
+	lat2 := lp.Lat
+	lon2 := lp.Lon
 
 	// Differences in radiant
 	dLat := (lat2 - lat1) * math.Pi / 180.0
@@ -461,5 +461,5 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 
 	lp.log.DEBUG.Printf("vehicle distance: %.3fkm", distance)
 
-	return distance * 1e3 <= lp.radius
+	return distance * 1e3 <= lp.Radius
 }
