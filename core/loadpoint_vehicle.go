@@ -330,6 +330,53 @@ func (lp *Loadpoint) identifyVehicleByStatus() {
 	}
 }
 
+// isVehicleAtHome checks wether vehicle is at home
+// false: if vehicle position is known and outside the radius
+// true: in all other cases, even in cases of error
+func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
+	if !lp.GeofenceEnabled || vehicle == nil {
+		return true
+	}
+
+	vs, ok := vehicle.(api.VehiclePosition)
+	if !ok {
+		lp.log.DEBUG.Println("vehicle do not support position tracking")
+		return true
+	}
+
+	lat1, lon1, err := vs.Position()
+	if err != nil {
+		lp.log.ERROR.Printf("vehicle position: %v", err)
+		return true
+	}
+
+	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat1, lon1)
+
+	if lat1 == 0 && lon1 == 0 {
+		lp.log.DEBUG.Println("vehicle not sending position data")
+		return true
+	}
+
+	lat2 := lp.GeofenceLat
+	lon2 := lp.GeofenceLon
+
+	// Differences in radiant
+	dLat := (lat2 - lat1) * math.Pi / 180.0
+	dLon := (lon2 - lon1) * math.Pi / 180.0
+
+	lat1 = lat1 * math.Pi / 180.0
+	lat2 = lat2 * math.Pi / 180.0
+
+	// Haversine formular
+	a := math.Sin(dLat/2)*math.Sin(dLat/2) + math.Sin(dLon/2)*math.Sin(dLon/2)*math.Cos(lat1)*math.Cos(lat2)
+	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
+	distance := 6371 * c // earth radius: 6371 km
+
+	lp.log.DEBUG.Printf("vehicle distance: %.3fkm", distance)
+
+	return distance * 1e3 <= lp.GeofenceRadius
+}
+
 // vehicleOdometer updates odometer
 func (lp *Loadpoint) vehicleOdometer() {
 	if vs, ok := lp.GetVehicle().(api.VehicleOdometer); ok {
@@ -407,52 +454,4 @@ func (lp *Loadpoint) vehicleClimateActive() bool {
 	}
 
 	return false
-}
-
-// isVehicleAtHome checks wether vehicle is at home
-// false: if vehicle position is known and outside the radius
-// true: in all other cases, even in cases of error
-
-func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
-	if !lp.GeofenceEnabled || vehicle == nil {
-		return true
-	}
-
-	vs, ok := vehicle.(api.VehiclePosition)
-	if !ok {
-		lp.log.DEBUG.Println("vehicle do not support position tracking")
-		return true
-	}
-
-	lat1, lon1, err := vs.Position()
-	if err != nil {
-		lp.log.ERROR.Printf("vehicle position: %v", err)
-		return true
-	}
-
-	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat1, lon1)
-
-	if lat1 == 0 && lon1 == 0 {
-		lp.log.DEBUG.Println("vehicle not sending position data")
-		return true
-	}
-
-	lat2 := lp.GeofenceLat
-	lon2 := lp.GeofenceLon
-
-	// Differences in radiant
-	dLat := (lat2 - lat1) * math.Pi / 180.0
-	dLon := (lon2 - lon1) * math.Pi / 180.0
-
-	lat1 = lat1 * math.Pi / 180.0
-	lat2 = lat2 * math.Pi / 180.0
-
-	// Haversine formular
-	a := math.Sin(dLat/2)*math.Sin(dLat/2) + math.Sin(dLon/2)*math.Sin(dLon/2)*math.Cos(lat1)*math.Cos(lat2)
-	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
-	distance := 6371 * c // earth radius: 6371 km
-
-	lp.log.DEBUG.Printf("vehicle distance: %.3fkm", distance)
-
-	return distance * 1e3 <= lp.GeofenceRadius
 }
