@@ -477,6 +477,8 @@ func (lp *Loadpoint) SetGeofenceEnabled(enabled bool) {
 	lp.Lock()
 	defer lp.Unlock()
 
+	lp.log.DEBUG.Printf("set geofence enabled: %v -> %v", lp.GeofenceEnabled, enabled)
+
 	lp.GeofenceEnabled = enabled
 	lp.settings.SetBool(keys.GeofenceEnabled, enabled)
 }
@@ -498,6 +500,8 @@ func (lp *Loadpoint) SetGeofenceLat(lat float64) {
 	lp.Lock()
 	defer lp.Unlock()
 
+	lp.log.DEBUG.Printf("set geofence latitude: %.4f -> %.4f", lp.GeofenceLat, lat)
+
 	lp.GeofenceLat = lat
 	lp.settings.SetFloat(keys.GeofenceLat, lat)
 }
@@ -518,6 +522,8 @@ func (lp *Loadpoint) SetGeofenceLon(lon float64) {
 
 	lp.Lock()
 	defer lp.Unlock()
+
+	lp.log.DEBUG.Printf("set geofence longitude: %.4f -> %.4f", lp.GeofenceLon, lon)
 
 	lp.GeofenceLon = lon
 	lp.settings.SetFloat(keys.GeofenceLon, lon)
