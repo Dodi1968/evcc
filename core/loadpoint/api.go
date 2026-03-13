@@ -155,6 +155,7 @@ type API interface {
 	SetGeofenceLon(float64)
 	GetGeofenceRadius() float64
 	SetGeofenceRadius(float64)
+
 	// GetEnableThreshold gets the loadpoint enable threshold
 	GetEnableThreshold() float64
 	// SetEnableThreshold sets loadpoint enable threshold

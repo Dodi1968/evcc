@@ -73,13 +73,13 @@ func (payload DynamicConfig) Apply(lp API) error {
 	lp.SetBatteryBoostLimit(payload.BatteryBoostLimit)
 	lp.SetLimitEnergy(payload.LimitEnergy)
 	lp.SetLimitSoc(payload.LimitSoc)
-
-	// TODO mode warning
-	lp.SetSocConfig(payload.Soc)
 	lp.SetGeofenceEnabled(payload.GeofenceEnabled)
 	lp.SetGeofenceLat(payload.GeofenceLat)
 	lp.SetGeofenceLon(payload.GeofenceLon)
 	lp.SetGeofenceRadius(payload.GeofenceRadius)
+
+	// TODO mode warning
+	lp.SetSocConfig(payload.Soc)
 
 	mode, err := api.ChargeModeString(payload.DefaultMode)
 	if err == nil {
