@@ -546,6 +546,8 @@ func (lp *Loadpoint) SetGeofenceRadius(radius float64) {
 	lp.Lock()
 	defer lp.Unlock()
 
+	lp.log.DEBUG.Printf("set geofence radius: %v -> %v", lp.GeofenceRadius, radius)
+
 	lp.GeofenceRadius = radius
 	lp.settings.SetFloat(keys.GeofenceRadius, radius)
 }
