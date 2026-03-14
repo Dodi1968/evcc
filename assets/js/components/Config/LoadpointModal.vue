@@ -547,10 +547,10 @@
 							<div class="mt-4">
 								<h6>{{ $t("config.loadpoint.geofenceTitle") }}</h6>
 								<p class="form-text text-muted mb-1">
-									{{ $t('config.loadpoint.geofenceDescription1') }}
+									{{ $t("config.loadpoint.geofenceDescription1") }}
 								</p>
 								<p class="form-text text-muted mb-3">
-									{{ $t('config.loadpoint.geofenceDescription2') }}
+									{{ $t("config.loadpoint.geofenceDescription2") }}
 								</p>
 
 								<FormRow
