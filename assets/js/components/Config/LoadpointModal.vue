@@ -546,6 +546,9 @@
 
 							<div class="mt-4">
 								<h6>{{ $t("config.loadpoint.geofenceTitle") }}</h6>
+								<p class="form-text text-muted mb-3">
+									{{ $t('config.loadpoint.geofenceDescription') }}
+								</p>
 
 								<FormRow
 									id="loadpointGeofenceEnable"
@@ -559,47 +562,49 @@
 								</FormRow>
 
 								<div v-if="values.geofence_enabled" class="ms-3 mb-5">
-<FormRow
-id="loadpointGeofenceLat"
-:label="$t('config.loadpoint.geofenceLatLabel')"
->
-<PropertyField
-id="loadpointGeofenceLat"
-v-model="values.lat"
-type="Float"
-size="w-25 w-min-200"
-required
-/>
-</FormRow>
+									<FormRow
+										id="loadpointGeofenceLat"
+										:label="$t('config.loadpoint.geofenceLatLabel')"
+										:help="$t('config.loadpoint.geofenceLatHelp')"
+									>
+										<PropertyField
+											id="loadpointGeofenceLat"
+											v-model="values.lat"
+											type="Float"
+											size="w-25 w-min-200"
+											required
+										/>
+									</FormRow>
 
-<FormRow
-id="loadpointGeofenceLon"
-:label="$t('config.loadpoint.geofenceLonLabel')"
->
-<PropertyField
-id="loadpointGeofenceLon"
-v-model="values.lon"
-type="Float"
-size="w-25 w-min-200"
-required
-/>
-</FormRow>
+									<FormRow
+										id="loadpointGeofenceLon"
+										:label="$t('config.loadpoint.geofenceLonLabel')"
+										:help="$t('config.loadpoint.geofenceLonHelp')"
+									>
+										<PropertyField
+											id="loadpointGeofenceLon"
+											v-model="values.lon"
+											type="Float"
+											size="w-25 w-min-200"
+											required
+										/>
+									</FormRow>
 
-<FormRow
-id="loadpointGeofenceRadius"
-:label="$t('config.loadpoint.geofenceRadiusLabel')"
-:help="$t('config.loadpoint.geofenceRadiusHelp')"
->
-<PropertyField
-id="loadpointGeofenceRadius"
-v-model="values.radius"
-type="Float"
-unit="m"
-size="w-25 w-min-200"
-required
-/>
-</FormRow>
-</div>
+									<FormRow
+										id="loadpointGeofenceRadius"
+										:label="$t('config.loadpoint.geofenceRadiusLabel')"
+										:help="$t('config.loadpoint.geofenceRadiusHelp')"
+									>
+										<PropertyField
+											id="loadpointGeofenceRadius"
+											v-model="values.radius"
+											type="Float"
+											unit="m"
+											size="w-25 w-min-200"
+											required
+										/>
+									</FormRow>
+								</div>
 							</div>
 						</div>
 					</div>
