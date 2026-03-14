@@ -350,7 +350,7 @@
       "geofenceRadiusHelp": "Maximal zulässiger Abstand des Fahrzeugs vom Ladepunkt",
       "geofenceRadiusLabel": "Radius",
       "geofenceTitle": "Geofencing",
-      "geofenceDescription": "Sofern das Fahrzeug sowohl die automatische Fahrzeugerkennung auf Basis des Ladestatus als auch die Positionsverfolgung unterstützt, wird zusätzlich zum Ladestatus geprüft, ob sich das Fahrzeug innerhalb des angegebenen Radius um den Ladepunkt befindet. <br>Falls das Fahrzeug die Positionsverfolgung nicht unterstützt, hat Geofencing keinen Einfluss auf die Erkennung dieses Fahrzeugs.",
+      "geofenceDescription": "<p>Sofern das Fahrzeug sowohl die automatische Fahrzeugerkennung auf Basis des Ladestatus als auch die Positionsverfolgung unterstützt, wird zusätzlich zum Ladestatus geprüft, ob sich das Fahrzeug innerhalb des angegebenen Radius um den Ladepunkt befindet.</p><p>Falls das Fahrzeug die Positionsverfolgung nicht unterstützt, hat Geofencing keinen Einfluss auf die Erkennung dieses Fahrzeugs.</p>",
       "maxCurrentHelp": "Muss größer als der Mindeststrom sein.",
       "maxCurrentLabel": "Maximaler Strom",
       "minCurrentHelp": "Gehe nur unter 6 A, wenn du weißt, was du tust.",

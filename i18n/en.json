@@ -350,7 +350,7 @@
       "geofenceRadiusHelp": "Maximum allowed distance of the vehicle from the charging point (in meters)",
       "geofenceRadiusLabel": "Radius",
       "geofenceTitle": "Geofencing",
-      "geofenceDescription": "If the vehicle supports both automatic vehicle detection based on charging status and position tracking, it will check whether the vehicle is within the defined radius around the configured loadpoint location in addition to the charging status. <br>If the vehicle does not support position tracking, geofencing will not affect the detection of that vehicle.",
+      "geofenceDescription": "<p>If the vehicle supports both automatic vehicle detection based on charging status and position tracking, it will check whether the vehicle is within the defined radius around the configured loadpoint location in addition to the charging status.</p><p>If the vehicle does not support position tracking, geofencing will not affect the detection of that vehicle.</p>",
       "maxCurrentHelp": "Must be greater than minimum current.",
       "maxCurrentLabel": "Maximum current",
       "minCurrentHelp": "Only go below 6 A if you know what you're doing.",
