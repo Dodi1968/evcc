@@ -349,7 +349,7 @@
       "geofenceLatLabel": "Latitude",
       "geofenceLonHelp": "Example: 8,1234",
       "geofenceLonLabel": "Longitude",
-      "geofenceRadiusHelp": "Maximum allowed distance of the vehicle from the charging point (in meters)",
+      "geofenceRadiusHelp": "Maximum allowed distance of the vehicle from loadpoint (in meters)",
       "geofenceRadiusLabel": "Radius",
       "geofenceTitle": "Geofencing",
       "maxCurrentHelp": "Must be greater than minimum current.",

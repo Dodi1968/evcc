@@ -353,7 +353,7 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 	lp.log.DEBUG.Printf("vehicle position: lat %.4f, lon %.4f", lat1, lon1)
 
 	if lat1 == 0 && lon1 == 0 {
-		lp.log.DEBUG.Println("vehicle not sending position data")
+		lp.log.WARN.Println("vehicle not sending position data")
 		return true
 	}
 
@@ -372,7 +372,7 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
 	distance := 6371 * c // earth radius: 6371 km
 
-	lp.log.DEBUG.Printf("vehicle distance: %.3fkm", distance)
+	lp.log.DEBUG.Printf("vehicle distance from loadpoint: %.3fkm", distance)
 
 	return distance * 1e3 <= lp.GeofenceRadius
 }

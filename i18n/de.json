@@ -349,7 +349,7 @@
       "geofenceLatLabel": "Breitengrad",
       "geofenceLonHelp": "Beispiel: 8,1234",
       "geofenceLonLabel": "Längengrad",
-      "geofenceRadiusHelp": "Maximal zulässiger Abstand des Fahrzeugs vom Ladepunkt",
+      "geofenceRadiusHelp": "Maximal zulässiger Abstand des Fahrzeugs vom Ladepunkt (in Meter)",
       "geofenceRadiusLabel": "Radius",
       "geofenceTitle": "Geofencing",
       "maxCurrentHelp": "Muss größer als der Mindeststrom sein.",
