@@ -8,7 +8,7 @@ import (
 	"github.com/evcc-io/evcc/core/types"
 )
 
-const geoLocationRadius = 50 // Maximum vehicle distance from loadpoint (m)
+const geoLocationRadius = 100 // Maximum vehicle distance from loadpoint (m)
 
 // IsVehicleAtHome checks whether vehicle is at home (geofencing)
 // false: if vehicle position is available and outside the defined radius
