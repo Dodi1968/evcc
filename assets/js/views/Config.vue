@@ -322,18 +322,6 @@
 						</template>
 					</DeviceCard>
 					<DeviceCard
-						:title="`${$t('config.geolocation.title')} 🧪`"
-						editable
-						:unconfigured="isUnconfigured(geolocationTags)"
-						data-testid="geolocation"
-						@edit="openModal('geolocation')"
-					>
-						<template #icon><OptimizerIcon /></template>
-						<template #tags>
-							<DeviceTags :tags="geolocationTags" />
-						</template>
-					</DeviceCard>
-					<DeviceCard
 						v-if="remote"
 						:title="$t('config.remote.title')"
 						editable

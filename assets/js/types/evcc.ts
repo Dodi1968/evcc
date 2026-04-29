@@ -238,7 +238,7 @@ export interface ConfigLoadpoint {
     };
     estimate: boolean;
   };
- }
+}
 
 export enum SMART_COST_TYPE {
   CO2 = "co2",

@@ -619,12 +619,6 @@ const defaultValues = {
 		poll: { mode: "charging", interval: 60 * nsPerMin },
 		estimate: true,
 	},
-	geofence: {
-		enabled: false,
-		lat: 0,
-		lon: 0,
-		radius: 100,
-	},
 	vehicle: "",
 	charger: "",
 	circuit: "",
