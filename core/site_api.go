@@ -317,7 +317,7 @@ func (site *Site) GetGeoLocation() types.GeoLocation {
 
 // SetGeoLocation sets the geolocation settings
 func (site *Site) SetGeoLocation(geoLocation types.GeoLocation) error {
-	site.log.DEBUG.Printf("set geolocation config: %+v", geoLocation)
+	site.log.DEBUG.Printf("set geolocation: %+v", geoLocation)
 
 	site.Lock()
 	defer site.Unlock()
