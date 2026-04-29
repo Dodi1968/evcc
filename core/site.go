@@ -323,10 +323,12 @@ func (site *Site) restoreSettings() error {
 		}
 	}
 
-	if v, err := settings.Json(keys.GeoLocation); err == nil {
-		if err := site.SetGeoLocation(v); err != nil {
+	var geoLocation types.GeoLocation
+	if err := settings.Json(keys.GeoLocation, &geoLocation); err == nil {
+		if err := site.SetGeoLocation(geoLocation); err != nil {
 			return err
 		}
+	}
 
 	// restore accumulated energy
 	pvEnergy := make(map[string]metrics.Accumulator)

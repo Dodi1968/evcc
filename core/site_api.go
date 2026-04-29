@@ -9,6 +9,7 @@ import (
 	"github.com/evcc-io/evcc/core/keys"
 	"github.com/evcc-io/evcc/core/loadpoint"
 	"github.com/evcc-io/evcc/core/site"
+	"github.com/evcc-io/evcc/core/types"
 	"github.com/evcc-io/evcc/server/db/settings"
 	"github.com/evcc-io/evcc/util/config"
 	"github.com/evcc-io/evcc/util/sponsor"

@@ -289,7 +289,7 @@ func (lp *Loadpoint) identifyVehicleByStatus() {
 		return
 	}
 
-	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil && site.isVehicleAtHome(vehicle) {
+	if vehicle := lp.coordinator.IdentifyVehicleByStatus(); vehicle != nil && lp.site.IsVehicleAtHome(vehicle) {
 		lp.stopVehicleDetection()
 		lp.setActiveVehicle(vehicle)
 		return
