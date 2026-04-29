@@ -16,11 +16,15 @@ const geoLocationRadius = 50 // Maximum vehicle distance from loadpoint (m)
 func (site *Site) IsVehicleAtHome(vehicle api.Vehicle) bool {
 	geoLocation := site.GetGeoLocation()
 
+	geoLocation.Enabled = true
+	geoLocation.Lat = 49.3284
+	geoLocation.Lon = 8.6964
+
 	if !geoLocation.Enabled || vehicle == nil {
 		return true
 	}
 
-	if err := validateGeoLocation(geoLocation); err != nil { // validate again (e.g. for yaml config)
+	if err := validateGeoLocation(geoLocation); err != nil {
 		site.log.ERROR.Println(err)
 		return true
 	}
