@@ -307,15 +307,15 @@ func (site *Site) SetResidualPower(power float64) error {
 	return nil
 }
 
-// GetGeoConfig returns the geolocation settings
-func (site *Site) GetGeoConfig() types.GeoConfig {
+// GetGeoLocation returns the geolocation settings
+func (site *Site) GetGeoLocation() types.GeoLocation {
 	site.RLock()
 	defer site.RUnlock()
 	return site.GeoLocation
 }
 
-// SetGeoConfig sets the geolocation settings
-func (site *Site) SetGeoConfig(geoLocation types.GeoConfig) error {
+// SetGeoLocation sets the geolocation settings
+func (site *Site) SetGeoLocation(geoLocation types.GeoLocation) error {
 	site.log.DEBUG.Printf("set geolocation config: %+v", geoLocation)
 
 	site.Lock()

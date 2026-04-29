@@ -23,6 +23,10 @@ type API interface {
 	GetTitle() string
 	SetTitle(string)
 
+	// GeoLocation
+	GetGeoLocation() types.GeoLocation
+	SetGeoLocation(types.GeoLocation) error
+
 	// Config
 	GetGridMeterRef() string
 	SetGridMeterRef(string)
@@ -62,13 +66,6 @@ type API interface {
 
 	GetResidualPower() float64
 	SetResidualPower(float64) error
-
-	//
-	// geolocation
-	//
-
-	GetGeoConfig() types.GeoConfig
-	SetGeoConfig(types.GeoConfig) error
 
 	//
 	// tariffs and costs

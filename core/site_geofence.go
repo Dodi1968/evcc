@@ -8,17 +8,19 @@ import (
 	"github.com/evcc-io/evcc/core/types"
 )
 
+const geoLocationRadius = 50 // Maximum vehicle distance from loadpoint (m)
+
 // isVehicleAtHome checks whether vehicle is at home (geofencing)
 // false: if vehicle position is available and outside the defined radius
 // true: in all other cases, even in cases of error or if position is not available
 func (site *Site) isVehicleAtHome(vehicle api.Vehicle) bool {
-	geoLocation := site.GetGeoConfig()
+	geoLocation := site.GetGeoLocation()
 
 	if !geoLocation.Enabled || vehicle == nil {
 		return true
 	}
 
-	if err := validateGeoConfig(geoLocation); err != nil { // validate again (e.g. for yaml config)
+	if err := validateGeoLocation(geoLocation); err != nil { // validate again (e.g. for yaml config)
 		site.log.ERROR.Println(err)
 		return true
 	}
@@ -49,7 +51,7 @@ func (site *Site) isVehicleAtHome(vehicle api.Vehicle) bool {
 	site.log.DEBUG.Printf(
 		"vehicle distance from loadpoint: %.1fm (radius: %vm, atHome=%v)",
 		distance(geoLocation.Lat, geoLocation.Lon, lat, lon)*1e3,
-		geoLocation.Radius,
+		geoLocationRadius,
 		atHome,
 	)
 
@@ -57,10 +59,9 @@ func (site *Site) isVehicleAtHome(vehicle api.Vehicle) bool {
 }
 
 // validate geolocation settings
-func validateGeoConfig(geoLocation types.GeoConfig) error {
+func validateGeoLocation(geoLocation types.GeoLocation) error {
 	if geoLocation.Enabled {
 		if (geoLocation.Lat == 0 && geoLocation.Lon == 0) || // geolocation enabled without setting coordinates
-			geoLocation.Radius < 1 ||
 			math.Abs(geoLocation.Lat) > 90 ||
 			math.Abs(geoLocation.Lon) > 180 {
 			return fmt.Errorf("invalid geolocation settings: %+v", geoLocation)
@@ -70,9 +71,9 @@ func validateGeoConfig(geoLocation types.GeoConfig) error {
 }
 
 // given a valid geolocation and vehicle coords, is it at home?
-func isAtHome(geoLocation types.GeoConfig, lat, lon float64) bool {
+func isAtHome(geoLocation types.GeoLocation, lat, lon float64) bool {
 	d := distance(geoLocation.Lat, geoLocation.Lon, lat, lon) * 1e3
-	return d <= geoLocation.Radius
+	return d <= geoLocationRadius
 }
 
 // calculate the distance between two points on a globe

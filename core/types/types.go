@@ -41,10 +41,9 @@ type BatteryState struct {
 	Forecast *BatteryForecast `json:"forecast,omitempty"`
 }
 
-// GeoConfig defines geolocation settings (incl. geofencing for vehicle detection)
-type GeoConfig struct {
+// GeoLocation defines geolocation settings (incl. geofencing for vehicle detection)
+type GeoLocation struct {
 	Enabled bool    `json:"enabled,omitempty"` // Enable geolocation services
 	Lat     float64 `json:"lat,omitempty"`     // Latitude of site
 	Lon     float64 `json:"lon,omitempty"`     // Longitude of site
-	Radius  float64 `json:"radius,omitempty"`  // Maximum vehicle distance from site (m)
 }
