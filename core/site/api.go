@@ -3,6 +3,7 @@ package site
 import (
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/core/loadpoint"
+	"github.com/evcc-io/evcc/core/types"
 )
 
 // publisher gives access to the site's publish function
@@ -61,6 +62,13 @@ type API interface {
 
 	GetResidualPower() float64
 	SetResidualPower(float64) error
+
+	//
+	// geolocation
+	//
+
+	GetGeoConfig() types.GeoConfig
+	SetGeoConfig(types.GeoConfig) error
 
 	//
 	// tariffs and costs

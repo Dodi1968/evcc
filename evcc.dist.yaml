@@ -106,6 +106,14 @@ site:
     aux:
       - aux # list of auxiliary meters for adjusting grid operating point
   residualPower: 0 # additional household usage margin
+  geolocation:
+    # includes geofencing, which improves the reliability of vehicle detection
+    # if geolocation is enabled, vehicle position is used for vehicle detection in addition to the charging status
+    enabled: false # set true to enable geolocation services (incl. geofencing)
+    lat: 49.1234 # latitude of loadpoint location (range: -90 to 90)
+    lon: 8.1234 # longitude of loadpoint location (range: -180 to 180)
+    radius: 100 # maximum allowed distance of vehicle from loadpoint in meter (minimum: 1)
+
 
 # loadpoint describes the charger, charge meter and connected vehicle
 loadpoints:
@@ -135,13 +143,6 @@ loadpoints:
     disable: # pv mode disable behavior
       delay: 3m # threshold must be exceeded for this long
       threshold: 0 # maximum import power (W)
-    geofence:
-      # geofencing improves the reliability of vehicle detection
-      # if geofencing is enabled, vehicle position is used for vehicle detection in addition to the charging status
-      enabled: false # set true to enable geofencing
-      lat: 49.1234 # latitude of loadpoint location (range: -90 to 90)
-      lon: 8.1234 # longitude of loadpoint location (range: -180 to 180)
-      radius: 100 # maximum allowed distance of vehicle from loadpoint in meter (minimum: 1)
 
 # tariffs are the fixed or variable tariffs
 tariffs:

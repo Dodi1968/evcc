@@ -59,10 +59,11 @@ type Site struct {
 	log *util.Logger
 
 	// configuration
-	Title         string       `mapstructure:"title"`         // UI title
-	Voltage       float64      `mapstructure:"voltage"`       // Operating voltage. 230V for Germany.
-	ResidualPower float64      `mapstructure:"residualPower"` // PV meter only: household usage. Grid meter: household safety margin
-	Meters        MetersConfig `mapstructure:"meters"`        // Meter references
+	Title         string          `mapstructure:"title"`         // UI title
+	Voltage       float64         `mapstructure:"voltage"`       // Operating voltage. 230V for Germany.
+	ResidualPower float64         `mapstructure:"residualPower"` // PV meter only: household usage. Grid meter: household safety margin
+	Meters        MetersConfig    `mapstructure:"meters"`        // Meter references
+	GeoLocation   types.GeoConfig `mapstructure:"geolocation"`   // Geolocation settings
 
 	// meters
 	circuit       api.Circuit                // Circuit
@@ -320,6 +321,11 @@ func (site *Site) restoreSettings() error {
 			return err
 		}
 	}
+
+	if v, err := settings.Json(keys.GeoPosition); err == nil {
+		if err := site.SetGeoConfig(v); err != nil {
+			return err
+		}
 
 	// restore accumulated energy
 	pvEnergy := make(map[string]metrics.Accumulator)
@@ -1022,6 +1028,8 @@ func (site *Site) prepare() {
 	site.publish(keys.ResidualPower, site.GetResidualPower())
 	site.publish(keys.SmartCostAvailable, site.isDynamicTariff(api.TariffUsagePlanner))
 	site.publish(keys.SmartFeedInPriorityAvailable, site.isDynamicTariff(api.TariffUsageFeedIn))
+
+	site.publish(keys.GeoLocation, site.GetGeoConfig())
 
 	site.publish(keys.Currency, site.tariffs.Currency)
 	if tariff := site.GetTariff(api.TariffUsagePlanner); tariff != nil {

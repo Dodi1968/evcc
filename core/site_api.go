@@ -307,6 +307,29 @@ func (site *Site) SetResidualPower(power float64) error {
 	return nil
 }
 
+// GetGeoConfig returns the geolocation settings
+func (site *Site) GetGeoConfig() types.GeoConfig {
+	site.RLock()
+	defer site.RUnlock()
+	return site.GeoLocation
+}
+
+// SetGeoConfig sets the geolocation settings
+func (site *Site) SetGeoConfig(geoLocation types.GeoConfig) error {
+	site.log.DEBUG.Printf("set geolocation config: %+v", geoLocation)
+
+	site.Lock()
+	defer site.Unlock()
+
+	if site.GeoLocation != geoLocation {
+		site.GeoLocation = geoLocation
+		settings.SetJson(keys.GeoLocation, site.GeoLocation)
+		site.publish(keys.GeoLocation, site.GeoLocation)
+	}
+
+	return nil
+}
+
 // GetTariff returns the respective tariff if configured or nil
 func (site *Site) GetTariff(tariff api.TariffUsage) api.Tariff {
 	site.RLock()
