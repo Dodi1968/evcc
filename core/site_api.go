@@ -2,6 +2,7 @@ package core
 
 import (
 	"errors"
+	"math"
 	"strings"
 	"time"
 
@@ -318,6 +319,14 @@ func (site *Site) GetGeoLocation() types.GeoLocation {
 // SetGeoLocation sets the geolocation settings
 func (site *Site) SetGeoLocation(geoLocation types.GeoLocation) error {
 	site.log.DEBUG.Printf("set geolocation: %+v", geoLocation)
+
+	if geoLocation.Enabled {
+		if (geoLocation.Lat == 0 && geoLocation.Lon == 0) || // geolocation enabled without setting coordinates
+			math.Abs(geoLocation.Lat) > 90 ||
+			math.Abs(geoLocation.Lon) > 180 {
+			return errors.New("invalid geolocation settings")
+		}
+	}
 
 	site.Lock()
 	defer site.Unlock()

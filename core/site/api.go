@@ -27,9 +27,6 @@ type API interface {
 	GetGeoLocation() types.GeoLocation
 	SetGeoLocation(types.GeoLocation) error
 
-	// isVehicleAtHome checks whether vehicle is at home (geofencing)
-	IsVehicleAtHome(api.Vehicle) bool
-
 	// Config
 	GetGridMeterRef() string
 	SetGridMeterRef(string)
