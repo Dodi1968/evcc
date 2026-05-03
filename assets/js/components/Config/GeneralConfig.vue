@@ -4,7 +4,7 @@
 			test-id="generalconfig-title"
 			:label="$t('config.general.title')"
 			:text="title || '---'"
-			@edit="openModal('title')"
+			@edit="openModal('site')"
 		>
 		</GeneralConfigEntry>
 
@@ -63,14 +63,14 @@
 			test-id="generalconfig-currency"
 			:label="$t('config.currency.title')"
 			:text="currency"
-			@edit="openModal('currency')"
+			@edit="openModal('site')"
 		/>
-		<CurrencyModal @changed="$emit('site-changed')" />
+		<SiteModal @changed="$emit('site-changed')" />
 	</div>
 </template>
 
 <script>
-import CurrencyModal from "./CurrencyModal.vue";
+import SiteModal from "./SiteModal.vue";
 import GeneralConfigEntry from "./GeneralConfigEntry.vue";
 import { openModal } from "@/configModal";
 import store from "@/store";
@@ -78,7 +78,7 @@ import formatter from "@/mixins/formatter";
 
 export default {
 	name: "GeneralConfig",
-	components: { CurrencyModal, GeneralConfigEntry },
+	components: { SiteModal, GeneralConfigEntry },
 	mixins: [formatter],
 	props: {
 		sponsorError: Boolean,
