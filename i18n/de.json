@@ -106,12 +106,6 @@
       "labelResidualPower": "Residualleistung",
       "title": "Regelverhalten"
     },
-    "currency": {
-      "description": "Wird für die Erfassung und Formatierung von Energiepreisen, Kosten und Einsparungen verwendet.",
-      "example": "Dein Ladepreis betrug {price}. Du hast {amount} gespart.",
-      "label": "Währung",
-      "title": "Währung"
-    },
     "deviceValue": {
       "activeClients": "Aktive Clients",
       "amount": "Anzahl",
@@ -261,6 +255,7 @@
       "saving": "Speichere …",
       "selectFile": "Durchsuchen",
       "showAdvancedSettings": "Erweiterte Einstellungen anzeigen",
+      "site": "Standort",
       "telemetry": "Telemetrie",
       "templateLoading": "Lade …",
       "title": "Titel",
@@ -700,6 +695,18 @@
       "labelVendorId": "Hersteller-ID",
       "title": "SMA Sunny Home Manager"
     },
+    "site": {
+      "title": "Standortdaten bearbeiten",
+      "sitetitle": {
+        "description": "Wird in der Hauptansicht und im Browser-Tab angezeigt.",
+        "label": "Titel des Standorts"
+      },
+      "currency": {
+        "description": "Wird für die Erfassung und Formatierung von Energiepreisen, Kosten und Einsparungen verwendet.",
+        "example": "Dein Ladepreis betrug {price}. Du hast {amount} gespart.",
+        "label": "Währung"
+      }
+    },
     "sponsor": {
       "activationKey": "Lizenzschlüssel",
       "activationKeyHint": "Per E-Mail zugesandt. Kann im {url} gefunden werden.",
@@ -838,11 +845,6 @@
     "telemetry": {
       "description": "Konfiguriere die Datenfreigabe, um evcc zu verbessern. Deine Privatsphäre ist uns wichtig und die Teilnahme ist völlig freiwillig.",
       "title": "Telemetrie"
-    },
-    "title": {
-      "description": "Wird in der Hauptansicht und im Browser-Tab angezeigt.",
-      "label": "Titel",
-      "title": "Titel bearbeiten"
     },
     "validation": {
       "failed": "fehlgeschlagen",

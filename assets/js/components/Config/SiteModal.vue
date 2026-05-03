@@ -2,19 +2,27 @@
 	<GenericModal
 		id="siteModal"
 		ref="modal"
-		title="Site"
+		:title="$t('config.site.title')"
 		data-testid="site-modal"
 		config-modal-name="site"
 		@open="open"
 	>
-		<p>{{ $t('config.currency.description') }}</p>
 		<p v-if="error" class="text-danger">{{ error }}</p>
 		<form ref="form" class="container mx-0 px-0" @submit.prevent="save">
-			<FormRow id="siteTitle" :label="$t('config.general.title')">
+			<FormRow
+				id="siteTitle"
+				:label="$t('config.site.sitetitle.label')"
+				:help="$t('config.site.sitetitle.description')"
+			>
 				<input id="siteTitle" v-model="title" class="form-control" />
 			</FormRow>
 
-			<FormRow id="currency" :label="$t('config.currency.label')" :example="exampleText">
+			<FormRow 
+				id="currency" 
+				:label="$t('config.site.currency.label')"
+				:example="exampleText"
+				:help="$t('config.site.currency.description')"
+			>
 				<select id="currency" v-model="selectedCurrency" class="form-select" required>
 					<option
 						v-for="currency in currencies"
@@ -92,7 +100,7 @@ export default {
 		exampleText() {
 			const price = this.fmtPricePerKWh(0.122, this.selectedCurrency);
 			const amount = this.fmtMoney(20.2, this.selectedCurrency, true, true);
-			return this.$t("config.currency.example", { price, amount });
+			return this.$t("config.site.currency.example", { price, amount });
 		},
 	},
 	methods: {

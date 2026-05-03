@@ -1,8 +1,8 @@
 <template>
 	<div class="group round-box p-4">
 		<GeneralConfigEntry
-			test-id="generalconfig-title"
-			:label="$t('config.general.title')"
+			test-id="generalconfig-site"
+			:label="$t('config.general.site')"
 			:text="title || '---'"
 			@edit="openModal('site')"
 		>
@@ -57,13 +57,6 @@
 			:label="$t('config.control.title')"
 			:text="controlStatus"
 			@edit="openModal('control')"
-		/>
-
-		<GeneralConfigEntry
-			test-id="generalconfig-currency"
-			:label="$t('config.currency.title')"
-			:text="currency"
-			@edit="openModal('site')"
 		/>
 		<SiteModal @changed="$emit('site-changed')" />
 	</div>

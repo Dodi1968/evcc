@@ -106,12 +106,6 @@
       "labelResidualPower": "Residual power",
       "title": "Control behavior"
     },
-    "currency": {
-      "description": "Used to format energy prices, costs and savings based on your tariff.",
-      "example": "Your charging price was {price}. You saved {amount}.",
-      "label": "Currency",
-      "title": "Currency"
-    },
     "deviceValue": {
       "activeClients": "Active clients",
       "amount": "Amount",
@@ -700,6 +694,18 @@
       "labelVendorId": "Vendor ID",
       "title": "SMA Sunny Home Manager"
     },
+    "site": {
+      "title": "Edit site settings",
+      "sitetitle": {
+        "description": "Displayed on main screen and browser tab.",
+        "label": "Site title"
+      },
+      "currency": {
+        "description": "Used to format energy prices, costs and savings based on your tariff.",
+        "example": "Your charging price was {price}. You saved {amount}.",
+        "label": "Currency"
+      }
+    },
     "sponsor": {
       "activationKey": "License Key",
       "activationKeyHint": "Sent to you via email. Can be found in the {url}.",
@@ -838,11 +844,6 @@
     "telemetry": {
       "description": "Configure data sharing to help improve evcc. Your privacy is important to us and participation is completely optional.",
       "title": "Telemetry"
-    },
-    "title": {
-      "description": "Displayed on main screen and browser tab.",
-      "label": "Title",
-      "title": "Edit Title"
     },
     "validation": {
       "failed": "failed",
