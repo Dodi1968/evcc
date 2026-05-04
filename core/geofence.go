@@ -9,7 +9,7 @@ import (
 
 const geoLocationRadius = 100 // Maximum vehicle distance from site (m)
 
-// IsVehicleAtHome checks whether vehicle is at home (geofencing)
+// isVehicleAtHome checks whether vehicle is at home (geofencing)
 // false: if vehicle position is available and outside the defined radius
 // true: in all other cases, even in cases of error or if position is not available
 func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {

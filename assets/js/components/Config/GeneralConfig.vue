@@ -92,9 +92,6 @@ export default {
 			const sec = store.state?.interval;
 			return sec ? this.fmtDuration(sec) : "";
 		},
-		currency() {
-			return store.state?.currency || "EUR";
-		},
 		sponsorStatus() {
 			const sponsor = store.state?.sponsor || {};
 			const name = sponsor.status?.name;
