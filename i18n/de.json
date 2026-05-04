@@ -705,6 +705,21 @@
         "description": "Wird für die Erfassung und Formatierung von Energiepreisen, Kosten und Einsparungen verwendet.",
         "example": "Dein Ladepreis betrug {price}. Du hast {amount} gespart.",
         "label": "Währung"
+      },
+      "geolocation": {
+        "title": "GeoLocation",
+        "enabled": {
+          "label": "GeoLocation aktivieren",
+          "description": "Aktiviere Geolokalisierungsdienste zur Fahzeugerkennung und Geofencing."
+        },
+        "latitude": {
+          "label": "Breitengrad",
+          "description": "Geografischer Breitengrad deines Ladestandorts."
+        },
+        "longitude": {
+          "label": "Längengrad",
+          "description": "Geografischer Längengrad deines Ladestandorts."
+        }
       }
     },
     "sponsor": {

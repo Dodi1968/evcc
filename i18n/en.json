@@ -704,6 +704,21 @@
         "description": "Used to format energy prices, costs and savings based on your tariff.",
         "example": "Your charging price was {price}. You saved {amount}.",
         "label": "Currency"
+      },
+      "geolocation": {
+        "title": "GeoLocation",
+        "enabled": {
+          "label": "Enable GeoLocation",
+          "description": "Enable geolocation services for vehicle detection and geofencing."
+        },
+        "latitude": {
+          "label": "Latitude",
+          "description": "Geographic latitude of your charging site."
+        },
+        "longitude": {
+          "label": "Longitude",
+          "description": "Geographic longitude of your charging site."
+        }
       }
     },
     "sponsor": {

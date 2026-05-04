@@ -16,9 +16,9 @@ func (lp *Loadpoint) isVehicleAtHome(vehicle api.Vehicle) bool {
 	geoLocation := lp.site.GetGeoLocation()
 
 	// Fix values - only for testing
-	geoLocation.Enabled = true
-	geoLocation.Lat = 49.3284
-	geoLocation.Lon = 8.6964
+	// geoLocation.Enabled = true
+	// geoLocation.Lat = 49.3284
+	// geoLocation.Lon = 8.6964
 
 	if !geoLocation.Enabled || vehicle == nil {
 		return true

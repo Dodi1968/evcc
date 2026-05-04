@@ -34,6 +34,56 @@
 				</select>
 			</FormRow>
 
+			<h5 class="mt-4 mb-3">{{ $t("config.site.geolocation.title") }}</h5>
+			<FormRow
+				id="geoLocationEnabled"
+				:label="$t('config.site.geolocation.enabled.label')"
+				:help="$t('config.site.geolocation.enabled.description')"
+			>
+				<div class="form-check form-switch">
+					<input
+						id="geoLocationEnabled"
+						v-model="geoLocationEnabled"
+						type="checkbox"
+						class="form-check-input"
+					/>
+				</div>
+			</FormRow>
+
+			<FormRow
+				v-if="geoLocationEnabled"
+				id="geoLocationLatitude"
+				:label="$t('config.site.geolocation.latitude.label')"
+				:help="$t('config.site.geolocation.latitude.description')"
+			>
+				<input
+					id="geoLocationLatitude"
+					v-model.number="geoLocationLatitude"
+					type="number"
+					step="0.000001"
+					min="-90"
+					max="90"
+					class="form-control"
+				/>
+			</FormRow>
+
+			<FormRow
+				v-if="geoLocationEnabled"
+				id="geoLocationLongitude"
+				:label="$t('config.site.geolocation.longitude.label')"
+				:help="$t('config.site.geolocation.longitude.description')"
+			>
+				<input
+					id="geoLocationLongitude"
+					v-model.number="geoLocationLongitude"
+					type="number"
+					step="0.000001"
+					min="-180"
+					max="180"
+					class="form-control"
+				/>
+			</FormRow>
+
 			<div class="mt-4 d-flex justify-content-between gap-2 flex-column flex-sm-row">
 				<button
 					type="button"
@@ -83,6 +133,12 @@ export default {
 			initialCurrency: "EUR",
 			title: "",
 			initialTitle: "",
+			geoLocationEnabled: false,
+			initialGeoLocationEnabled: false,
+			geoLocationLatitude: 0,
+			initialGeoLocationLatitude: 0,
+			geoLocationLongitude: 0,
+			initialGeoLocationLongitude: 0,
 		};
 	},
 	computed: {
@@ -95,7 +151,10 @@ export default {
 		changed() {
 			return (
 				this.title !== this.initialTitle ||
-				this.selectedCurrency !== this.initialCurrency
+				this.selectedCurrency !== this.initialCurrency ||
+				this.geoLocationEnabled !== this.initialGeoLocationEnabled ||
+				this.geoLocationLatitude !== this.initialGeoLocationLatitude ||
+				this.geoLocationLongitude !== this.initialGeoLocationLongitude
 			);
 		},
 		exampleText() {
@@ -107,12 +166,19 @@ export default {
 	methods: {
 		reset() {
 			const currency = store?.state?.currency || "EUR";
+			const geoLocation = store?.state?.geoLocation || {};
 			this.saving = false;
 			this.error = "";
 			this.selectedCurrency = currency;
 			this.initialCurrency = currency;
 			this.title = store.state?.siteTitle || "";
 			this.initialTitle = this.title;
+			this.geoLocationEnabled = geoLocation.enabled || false;
+			this.initialGeoLocationEnabled = this.geoLocationEnabled;
+			this.geoLocationLatitude = geoLocation.lat || 0;
+			this.initialGeoLocationLatitude = this.geoLocationLatitude;
+			this.geoLocationLongitude = geoLocation.lon || 0;
+			this.initialGeoLocationLongitude = this.geoLocationLongitude;
 		},
 		async open() {
 			this.reset();
@@ -127,6 +193,21 @@ export default {
 				}
 				if (this.selectedCurrency !== this.initialCurrency) {
 					requests.push(api.put("/config/currency", JSON.stringify(this.selectedCurrency)));
+				}
+				if (
+					this.geoLocationEnabled !== this.initialGeoLocationEnabled ||
+					this.geoLocationLatitude !== this.initialGeoLocationLatitude ||
+					this.geoLocationLongitude !== this.initialGeoLocationLongitude
+				) {
+					requests.push(
+						api.put("/config/site", {
+							geoLocation: {
+								enabled: this.geoLocationEnabled,
+								lat: this.geoLocationLatitude,
+								lon: this.geoLocationLongitude,
+							},
+						})
+					);
 				}
 				await Promise.all(requests);
 				this.$emit("changed");

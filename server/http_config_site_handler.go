@@ -18,7 +18,7 @@ func siteHandler(site site.API) http.HandlerFunc {
 			Battery     []string          `json:"battery"`
 			Aux         []string          `json:"aux"`
 			Ext         []string          `json:"ext"`
-			GeoLocation types.GeoLocation `json:"geolocation"`
+			GeoLocation types.GeoLocation `json:"geoLocation"`
 		}{
 			Title:       site.GetTitle(),
 			Grid:        site.GetGridMeterRef(),
