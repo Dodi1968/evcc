@@ -1921,6 +1921,9 @@ func (lp *Loadpoint) Update(sitePower, batteryBoostPower float64, consumption, f
 		}
 	}
 
+	// test
+	lp.log.DEBUG.Printf("geolocation settings - debug: %+v", site.GeoLocation)
+
 	// smart cost
 	smartCostActive, smartCostNextStart := lp.checkSmartLimit(lp.GetSmartCostLimit(), consumption, true)
 	lp.publish(keys.SmartCostActive, smartCostActive)
