@@ -699,33 +699,33 @@
       "title": "SMA Sunny Home Manager"
     },
     "site": {
-      "title": "Standortdaten bearbeiten",
-      "sitetitle": {
-        "description": "Wird in der Hauptansicht und im Browser-Tab angezeigt.",
-        "label": "Titel des Standorts"
-      },
       "currency": {
         "description": "Wird für die Erfassung und Formatierung von Energiepreisen, Kosten und Einsparungen verwendet.",
         "example": "Dein Ladepreis betrug {price}. Du hast {amount} gespart.",
         "label": "Währung"
       },
       "geolocation": {
-        "title": "Standortkoordinaten",
         "description": "Die Koordinaten des Ladestandorts werden für Geolokationsdienste (z.B. Geofencing zur Optimierung der Fahrzeugerkennung) verwendet.",
         "enabled": {
           "label": "Geolokationsdienste aktivieren"
         },
         "latitude": {
-          "label": "Breitengrad",
           "description": "Wertebereich: -90 bis 90",
-          "example": "49.1234"
+          "example": "49.1234",
+          "label": "Breitengrad"
         },
         "longitude": {
-          "label": "Längengrad",
           "description": "Wertebereich: -180 bis 180",
-          "example": "8.1234"
-        }
-      }
+          "example": "8.1234",
+          "label": "Längengrad"
+        },
+        "title": "Standortkoordinaten"
+      },
+      "sitetitle": {
+        "description": "Wird in der Hauptansicht und im Browser-Tab angezeigt.",
+        "label": "Titel des Standorts"
+      },
+      "title": "Standortdaten bearbeiten"
     },
     "sponsor": {
       "activationKey": "Lizenzschlüssel",

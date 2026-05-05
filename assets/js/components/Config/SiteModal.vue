@@ -17,8 +17,8 @@
 				<input id="siteTitle" v-model="title" class="form-control" />
 			</FormRow>
 
-			<FormRow 
-				id="currency" 
+			<FormRow
+				id="currency"
 				:label="$t('config.site.currency.label')"
 				:example="exampleText"
 				:help="$t('config.site.currency.description')"
@@ -45,7 +45,7 @@
 						class="form-check-input"
 					/>
 					<label class="form-check-label ms-3" for="geoLocationEnabled">
-						{{ $t('config.site.geolocation.enabled.label') }}
+						{{ $t("config.site.geolocation.enabled.label") }}
 					</label>
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 					class="btn btn-link text-muted btn-cancel"
 					data-bs-dismiss="modal"
 				>
-					{{ $t('config.general.cancel') }}
+					{{ $t("config.general.cancel") }}
 				</button>
 
 				<button
@@ -107,7 +107,7 @@
 						aria-hidden="true"
 					>
 					</span>
-					{{ $t('config.general.save') }}
+					{{ $t("config.general.save") }}
 				</button>
 			</div>
 		</form>
@@ -194,7 +194,9 @@ export default {
 					requests.push(api.put("/config/site", { title: this.title }));
 				}
 				if (this.selectedCurrency !== this.initialCurrency) {
-					requests.push(api.put("/config/currency", JSON.stringify(this.selectedCurrency)));
+					requests.push(
+						api.put("/config/currency", JSON.stringify(this.selectedCurrency))
+					);
 				}
 				if (
 					this.geoLocationEnabled !== this.initialGeoLocationEnabled ||
