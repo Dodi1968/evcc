@@ -131,8 +131,8 @@ export default {
 		return {
 			saving: false,
 			error: "",
-			selectedCurrency: "EUR",
-			initialCurrency: "EUR",
+			selectedCurrency: CURRENCY.EUR,
+			initialCurrency: CURRENCY.EUR,
 			title: "",
 			initialTitle: "",
 			geoLocationEnabled: false,
@@ -168,11 +168,11 @@ export default {
 	methods: {
 		reset() {
 			const currency = store?.state?.currency || "EUR";
-			const geoLocation = store?.state?.geoLocation || {};
+			const geoLocation: any = store?.state?.geoLocation || {};
 			this.saving = false;
 			this.error = "";
-			this.selectedCurrency = currency;
-			this.initialCurrency = currency;
+			this.selectedCurrency = currency as CURRENCY;
+			this.initialCurrency = currency as CURRENCY;
 			this.title = store.state?.siteTitle || "";
 			this.initialTitle = this.title;
 			this.geoLocationEnabled = geoLocation.enabled || false;
@@ -215,7 +215,7 @@ export default {
 				}
 				await Promise.all(requests);
 				this.$emit("changed");
-				this.$refs.modal.close();
+				(this.$refs as any)["modal"].close();
 			} catch (e) {
 				this.error = (e && (e as any).message) || String(e);
 			}
