@@ -36,10 +36,7 @@
 
 			<h5 class="mt-4 mb-3">{{ $t("config.site.geolocation.title") }}</h5>
 			<p class="text-muted small">{{ $t("config.site.geolocation.description") }}</p>
-			<FormRow
-				id="geoLocationEnabled"
-				:label="$t('config.site.geolocation.enabled.label')"
-			>
+			<div class="mb-4">
 				<div class="form-check form-switch">
 					<input
 						id="geoLocationEnabled"
@@ -47,8 +44,11 @@
 						type="checkbox"
 						class="form-check-input"
 					/>
+					<label class="form-check-label ms-3" for="geoLocationEnabled">
+						{{ $t('config.site.geolocation.enabled.label') }}
+					</label>
 				</div>
-			</FormRow>
+			</div>
 
 			<FormRow
 				v-if="geoLocationEnabled"
