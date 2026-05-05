@@ -709,18 +709,20 @@
         "label": "Currency"
       },
       "geolocation": {
-        "title": "GeoLocation",
+        "title": "Site coordinates",
+        "description": "Site coordinates are used for geolocation services (e.g. geofencing to optimise vehicle detection)",
         "enabled": {
-          "label": "Enable GeoLocation",
-          "description": "Enable geolocation services for vehicle detection and geofencing."
+          "label": "Enable geolocation services"
         },
         "latitude": {
           "label": "Latitude",
-          "description": "Geographic latitude of your charging site."
+          "description": "Value range: -90 to 90",
+          "example": "49.1234"
         },
         "longitude": {
           "label": "Longitude",
-          "description": "Geographic longitude of your charging site."
+          "description": "Value range: -180 to 180",
+          "example": "8.1234"
         }
       }
     },

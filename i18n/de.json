@@ -710,18 +710,20 @@
         "label": "Währung"
       },
       "geolocation": {
-        "title": "GeoLocation",
+        "title": "Standortkoordinaten",
+        "description": "Die Koordinaten des Ladestandorts werden verwendet für Geolokationsdienste (z.B. Geofencing zur Optimierung der Fahrzeugerkennung)",
         "enabled": {
-          "label": "GeoLocation aktivieren",
-          "description": "Aktiviere Geolokalisierungsdienste zur Fahzeugerkennung und Geofencing."
+          "label": "Geolokationsdienste aktivieren"
         },
         "latitude": {
           "label": "Breitengrad",
-          "description": "Geografischer Breitengrad deines Ladestandorts."
+          "description": "Wertebereich: -90 bis 90",
+          "example": "49.1234"
         },
         "longitude": {
           "label": "Längengrad",
-          "description": "Geografischer Längengrad deines Ladestandorts."
+          "description": "Wertebereich: -180 bis 180",
+          "example": "8.1234"
         }
       }
     },

@@ -38,7 +38,6 @@
 			<FormRow
 				id="geoLocationEnabled"
 				:label="$t('config.site.geolocation.enabled.label')"
-				:help="$t('config.site.geolocation.enabled.description')"
 			>
 				<div class="form-check form-switch">
 					<input
@@ -54,6 +53,7 @@
 				v-if="geoLocationEnabled"
 				id="geoLocationLatitude"
 				:label="$t('config.site.geolocation.latitude.label')"
+				:example="$t('config.site.geolocation.latitude.example')"
 				:help="$t('config.site.geolocation.latitude.description')"
 			>
 				<input
@@ -71,6 +71,7 @@
 				v-if="geoLocationEnabled"
 				id="geoLocationLongitude"
 				:label="$t('config.site.geolocation.longitude.label')"
+				:example="$t('config.site.geolocation.longitude.example')"
 				:help="$t('config.site.geolocation.longitude.description')"
 			>
 				<input
