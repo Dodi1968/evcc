@@ -711,7 +711,7 @@
       },
       "geolocation": {
         "title": "Standortkoordinaten",
-        "description": "Die Koordinaten des Ladestandorts werden verwendet für Geolokationsdienste (z.B. Geofencing zur Optimierung der Fahrzeugerkennung)",
+        "description": "Die Koordinaten des Ladestandorts werden für Geolokationsdienste (z.B. Geofencing zur Optimierung der Fahrzeugerkennung) verwendet.",
         "enabled": {
           "label": "Geolokationsdienste aktivieren"
         },

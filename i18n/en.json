@@ -710,7 +710,7 @@
       },
       "geolocation": {
         "title": "Site coordinates",
-        "description": "Site coordinates are used for geolocation services (e.g. geofencing to optimise vehicle detection)",
+        "description": "Site coordinates are used for geolocation services (e.g. geofencing to optimise vehicle detection).",
         "enabled": {
           "label": "Enable geolocation services"
         },

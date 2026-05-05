@@ -35,6 +35,7 @@
 			</FormRow>
 
 			<h5 class="mt-4 mb-3">{{ $t("config.site.geolocation.title") }}</h5>
+			<p class="text-muted small">{{ $t("config.site.geolocation.description") }}</p>
 			<FormRow
 				id="geoLocationEnabled"
 				:label="$t('config.site.geolocation.enabled.label')"
