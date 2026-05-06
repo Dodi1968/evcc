@@ -720,7 +720,7 @@
           "example": "8.1234",
           "label": "Längengrad"
         },
-        "title": "Standortkoordinaten"
+        "title": "Koordinaten"
       },
       "sitetitle": {
         "description": "Wird in der Hauptansicht und im Browser-Tab angezeigt.",

@@ -719,7 +719,7 @@
           "example": "8.1234",
           "label": "Longitude"
         },
-        "title": "Site coordinates"
+        "title": "Coordinates"
       },
       "sitetitle": {
         "description": "Displayed on main screen and browser tab.",
