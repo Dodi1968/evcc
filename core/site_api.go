@@ -65,6 +65,34 @@ func (site *Site) SetTitle(title string) {
 	settings.SetString(keys.Title, title)
 }
 
+// GetGeoLocation returns the geolocation settings
+func (site *Site) GetGeoLocation() types.GeoLocation {
+	site.RLock()
+	defer site.RUnlock()
+	return site.GeoLocation
+}
+
+// SetGeoLocation sets the geolocation settings
+func (site *Site) SetGeoLocation(geoLocation types.GeoLocation) {
+	if geoLocation.Enabled {
+		if (geoLocation.Lat == 0 && geoLocation.Lon == 0) || // geolocation enabled without setting coordinates
+			math.Abs(geoLocation.Lat) > 90 ||
+			math.Abs(geoLocation.Lon) > 180 {
+			site.log.ERROR.Printf("invalid geolocation settings: %+v", geoLocation)
+			return
+		}
+	}
+
+	site.log.DEBUG.Printf("set geolocation: %+v", geoLocation)
+
+	site.Lock()
+	defer site.Unlock()
+
+	site.GeoLocation = geoLocation
+	site.publish(keys.GeoLocation, geoLocation)
+	settings.SetJson(keys.GeoLocation, geoLocation)
+}
+
 // GetGridMeterRef returns the GridMeterRef
 func (site *Site) GetGridMeterRef() string {
 	site.RLock()
@@ -304,37 +332,6 @@ func (site *Site) SetResidualPower(power float64) error {
 		site.ResidualPower = power
 		settings.SetFloat(keys.ResidualPower, site.ResidualPower)
 		site.publish(keys.ResidualPower, site.ResidualPower)
-	}
-
-	return nil
-}
-
-// GetGeoLocation returns the geolocation settings
-func (site *Site) GetGeoLocation() types.GeoLocation {
-	site.RLock()
-	defer site.RUnlock()
-	return site.GeoLocation
-}
-
-// SetGeoLocation sets the geolocation settings
-func (site *Site) SetGeoLocation(geoLocation types.GeoLocation) error {
-	site.log.DEBUG.Printf("set geolocation: %+v", geoLocation)
-
-	if geoLocation.Enabled {
-		if (geoLocation.Lat == 0 && geoLocation.Lon == 0) || // geolocation enabled without setting coordinates
-			math.Abs(geoLocation.Lat) > 90 ||
-			math.Abs(geoLocation.Lon) > 180 {
-			return errors.New("invalid geolocation settings")
-		}
-	}
-
-	site.Lock()
-	defer site.Unlock()
-
-	if site.GeoLocation != geoLocation {
-		site.GeoLocation = geoLocation
-		settings.SetJson(keys.GeoLocation, site.GeoLocation)
-		site.publish(keys.GeoLocation, site.GeoLocation)
 	}
 
 	return nil

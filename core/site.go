@@ -325,9 +325,7 @@ func (site *Site) restoreSettings() error {
 
 	var geoLocation types.GeoLocation
 	if err := settings.Json(keys.GeoLocation, &geoLocation); err == nil {
-		if err := site.SetGeoLocation(geoLocation); err != nil {
-			return err
-		}
+		site.SetGeoLocation(geoLocation)
 	}
 
 	// restore accumulated energy

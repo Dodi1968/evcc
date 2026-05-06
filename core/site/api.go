@@ -25,7 +25,7 @@ type API interface {
 
 	// GeoLocation
 	GetGeoLocation() types.GeoLocation
-	SetGeoLocation(types.GeoLocation) error
+	SetGeoLocation(types.GeoLocation)
 
 	// Config
 	GetGridMeterRef() string
