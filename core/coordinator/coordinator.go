@@ -148,12 +148,14 @@ func (c *Coordinator) identifyVehicleByStatus(available []api.Vehicle) api.Vehic
 
 			// vehicle is plugged or charging, so it should be the right one
 			if status == api.StatusB || status == api.StatusC {
-				if res != nil {
-					c.log.WARN.Println("vehicle status: >1 matches, giving up")
-					return nil
-				}
+				if c.isVehicleAtHome(vehicle) {
+					if res != nil {
+						c.log.WARN.Println("vehicle status & position: >1 matches, giving up")
+						return nil
+					}
 
 				res = vehicle
+				}
 			}
 		}
 	}
