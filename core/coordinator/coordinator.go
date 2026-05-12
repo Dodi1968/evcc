@@ -149,7 +149,7 @@ func (c *Coordinator) identifyVehicleByStatus(available []api.Vehicle) api.Vehic
 
 			c.log.DEBUG.Printf("vehicle status: %s (%s)", status, vehicle.GetTitle())
 
-			// vehicle is plugged or charging, so it should be the right one
+			// vehicle is plugged or charging and at site location, so it should be the right one
 			if status == api.StatusB || status == api.StatusC {
 				if c.isVehicleAtHome(vehicle) {
 					if res != nil {
