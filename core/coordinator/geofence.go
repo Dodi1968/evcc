@@ -13,6 +13,11 @@ const geoLocationRadius = 100 // Maximum vehicle distance from site (m)
 // false: if vehicle position is available and outside geoLocationRadius
 // true: in all other cases, even in cases of error or if position is not available
 func (c *Coordinator) isVehicleAtHome(vehicle api.Vehicle) bool {
+	if c.site == nil {
+		c.log.DEBUG.Println("site unavailable for geolocation")
+		return true
+	}
+
 	geoLocation := c.site.GetGeoLocation()
 
 	if !geoLocation.Enabled || vehicle == nil {

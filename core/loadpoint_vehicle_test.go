@@ -246,7 +246,7 @@ func TestVehicleDetectByID(t *testing.T) {
 			log: util.NewLogger("foo"),
 		}
 
-		lp.coordinator = coordinator.NewAdapter(lp, coordinator.New(util.NewLogger("foo"), []api.Vehicle{v1, v2}))
+		lp.coordinator = coordinator.NewAdapter(lp, coordinator.New(util.NewLogger("foo"), []api.Vehicle{v1, v2}, nil))
 
 		if tc.prepare != nil {
 			tc.prepare(tc)
@@ -366,22 +366,7 @@ func TestReconnectVehicle(t *testing.T) {
 				mode:        api.ModeNow,
 			}
 
-			lp.coordinator = coordinator.NewAdapter(lp, coordinator.New(util.NewLogger("foo"), []api.Vehicle{vehicle}))
-
-			attachListeners(t, lp)
-
-			// mode now
-			charger.EXPECT().MaxCurrent(int64(maxA))
-			// sync charger
-			charger.EXPECT().Enabled().Return(true, nil)
-
-			// vehicle not updated yet
-			vehicle.MockChargeState.EXPECT().Status().Return(api.StatusA, nil)
-
-			lp.Update(0, 0, nil, nil, false, false, 0, nil, nil)
-			ctrl.Finish()
-
-			// detection started
+		lp.coordinator = coordinator.NewAdapter(lp, coordinator.New(util.NewLogger("foo"), []api.Vehicle{vehicle}, nil))
 			assert.Equal(t, lp.clock.Now(), lp.vehicleDetect, "vehicle detection not started")
 
 			// vehicle not detected yet
