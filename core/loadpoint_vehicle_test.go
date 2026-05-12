@@ -381,7 +381,7 @@ func TestReconnectVehicle(t *testing.T) {
 			lp.Update(0, 0, nil, nil, false, false, 0, nil, nil)
 			ctrl.Finish()
 
-			// detection startet
+			// detection started
 			assert.Equal(t, lp.clock.Now(), lp.vehicleDetect, "vehicle detection not started")
 
 			// vehicle not detected yet
