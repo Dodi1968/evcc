@@ -5,14 +5,9 @@ import (
 
 	"github.com/evcc-io/evcc/api"
 	"github.com/evcc-io/evcc/core/loadpoint"
-	"github.com/evcc-io/evcc/core/types"
+	"github.com/evcc-io/evcc/core/site"
 	"github.com/evcc-io/evcc/util"
 )
-
-// Site represents the site interface needed by coordinator
-type Site interface {
-	GetGeoLocation() types.GeoLocation
-}
 
 // Coordinator coordinates vehicle access between loadpoints
 type Coordinator struct {
@@ -20,11 +15,11 @@ type Coordinator struct {
 	log      *util.Logger
 	vehicles []api.Vehicle
 	tracked  map[api.Vehicle]loadpoint.API
-	site     Site
+	site     site.API
 }
 
 // New creates a coordinator for a set of vehicles
-func New(log *util.Logger, vehicles []api.Vehicle, site Site) *Coordinator {
+func New(log *util.Logger, vehicles []api.Vehicle, site site.API) *Coordinator {
 	return &Coordinator{
 		log:      log,
 		vehicles: vehicles,
