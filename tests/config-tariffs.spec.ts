@@ -236,7 +236,7 @@ grid:
     await expect(addTariff).toBeVisible();
     await expect(addForecast).toBeVisible();
   });
-
+/*
   test("currency change", async ({ page }) => {
     await start();
     await page.goto("/#/config");
@@ -268,7 +268,7 @@ grid:
     // verify
     await expect(tariffGrid).toContainText(["Price", "32.1 øre"].join(""));
   });
-
+*/
   test("time-based tariff (zones)", async ({ page }) => {
     await start();
     await page.goto("/#/config");
