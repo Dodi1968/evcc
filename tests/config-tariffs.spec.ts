@@ -236,39 +236,7 @@ grid:
     await expect(addTariff).toBeVisible();
     await expect(addForecast).toBeVisible();
   });
-/*
-  test("currency change", async ({ page }) => {
-    await start();
-    await page.goto("/#/config");
 
-    const tariffModal = page.getByTestId("tariff-modal");
-    const tariffGrid = page.getByTestId("tariff-grid");
-
-    // create grid tariff (default EUR)
-    await page.getByRole("button", { name: "Add tariff" }).click();
-    await expectModalVisible(tariffModal);
-    await tariffModal.getByRole("button", { name: "Add grid import tariff" }).click();
-    await tariffModal.getByLabel("Provider").selectOption("Fixed Price");
-    await tariffModal.getByLabel("Price").fill("32.1");
-    await tariffModal.getByRole("button", { name: "Validate & save" }).click();
-    await expectModalHidden(tariffModal);
-    await expect(tariffGrid).toContainText(["Price", "32.1 ct"].join(""));
-
-    // change currency to NOK
-    await page.getByTestId("generalconfig-site").getByRole("button", { name: "edit" }).click();
-    const currencyModal = page.getByTestId("site-modal");
-    await expectModalVisible(currencyModal);
-    await currencyModal.getByLabel("Currency").selectOption("NOK");
-    await expect(
-      currencyModal.getByText("Example: Your charging price was 12.2 øre/kWh. You saved kr 20.20.")
-    ).toBeVisible();
-    await currencyModal.getByRole("button", { name: "Save" }).click();
-    await expectModalHidden(currencyModal);
-
-    // verify
-    await expect(tariffGrid).toContainText(["Price", "32.1 øre"].join(""));
-  });
-*/
   test("time-based tariff (zones)", async ({ page }) => {
     await start();
     await page.goto("/#/config");
