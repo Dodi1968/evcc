@@ -17,6 +17,10 @@ export async function expectModalHidden(modal: Locator): Promise<void> {
   await expect(modal).toHaveAttribute("aria-hidden", "true");
 }
 
+export function getVisibleModal(page: Page, testId: string): Locator {
+  return page.locator(`[data-testid="${testId}"]:visible`);
+}
+
 export async function editorClear(editor: Locator, iterations = 10): Promise<void> {
   for (let i = 0; i < iterations; i++) {
     await editor.locator(".view-line").nth(0).click();

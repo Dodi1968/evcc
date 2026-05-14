@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { start, stop, restart, baseUrl } from "./evcc";
-import { expectModalHidden, expectModalVisible, openMoreMenu } from "./utils";
+import { expectModalHidden, expectModalVisible, getVisibleModal, openMoreMenu } from "./utils";
 
 const CONFIG_GRID_ONLY = "config-grid-only.evcc.yaml";
 const NETWORK_HOST = "somehostname.local";
@@ -35,7 +35,7 @@ test.describe("general", async () => {
 
     await expect(page.getByTestId("generalconfig-site")).toContainText("Hello World");
     await page.getByTestId("generalconfig-site").getByRole("button", { name: "edit" }).click();
-    const modal = page.getByTestId("site-modal");
+    const modal = getVisibleModal(page, "site-modal");
     await expectModalVisible(modal);
     await modal.getByLabel("Title").fill("Whoops World");
 

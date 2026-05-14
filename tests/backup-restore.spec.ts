@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { start, stop, baseUrl, restart } from "./evcc";
-import { openMoreMenu, expectModalVisible, expectModalHidden } from "./utils";
+import { openMoreMenu, expectModalVisible, expectModalHidden, getVisibleModal } from "./utils";
 import fs from "fs";
 import path from "path";
 
@@ -58,7 +58,7 @@ test.describe("reset", async () => {
     await meterModal.getByRole("button", { name: "Save" }).click();
     await expectModalHidden(meterModal);
     await page.getByTestId("generalconfig-site").getByRole("button", { name: "edit" }).click();
-    const titleModal = page.getByTestId("site-modal");
+    const titleModal = getVisibleModal(page, "site-modal");
     await expectModalVisible(titleModal);
     await titleModal.getByLabel("Title").fill(title);
     await titleModal.getByRole("button", { name: "Save" }).click();
@@ -115,7 +115,7 @@ test.describe("backup and restore", async () => {
 
     // set initial title
     await page.getByTestId("generalconfig-site").getByRole("button", { name: "edit" }).click();
-    const titleModal = page.getByTestId("site-modal");
+    const titleModal = getVisibleModal(page, "site-modal");
     await expectModalVisible(titleModal);
     await titleModal.getByLabel("Title").fill(initialTitle);
     await titleModal.getByRole("button", { name: "Save" }).click();
